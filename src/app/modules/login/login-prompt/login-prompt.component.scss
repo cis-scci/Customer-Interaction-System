@@ -7,11 +7,13 @@
     .was-validated {
       input.ng-invalid,  
       select.ng-invalid {
-          border: 1px solid lightcoral;          
+          border: 1px solid lightcoral;    
+          background-image: none;      
       }
       input.ng-valid, 
       select.ng-valid {
           border: 1px solid lightgreen;
+          background-image: none;
       }
   }
     

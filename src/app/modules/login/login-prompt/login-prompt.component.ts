@@ -77,9 +77,11 @@ export class LoginPromptComponent implements OnInit {
     //       this.errMessage = 'Username or password is incorrect';
     //     }
     //   );
-    if (this.loginFormGroup.valid === false) {      
+    if (this.loginFormGroup.valid === false || !(username =="sales@test.com" && password == "test-admin")) {      
       let form = document.getElementById('loginForm');
       form.classList.add('was-validated');
+      if(username != "" && password != "")
+      this.errMessage = 'Username or password is incorrect';
     } else if (this.loginFormGroup.valid === true) {  
       if(username =="sales@test.com" && password == "test-admin")    
       this.router.navigate(['/main']);
