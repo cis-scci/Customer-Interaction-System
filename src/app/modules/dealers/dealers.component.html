@@ -1,39 +1,56 @@
-<form>
-  <div class="form-group form-inline">
-      <div class="inner-addon right-addon">
-      <i class="glyphicon glyphicon-search"></i>
-      <input class="form-control ml-2" type="text" style="width: 300px;" name="searchTerm" [(ngModel)]="service.searchTerm"/>
-    </div>
-      <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+<div class="container-fluid">
+  <div class="table-container">
+    <div class="card card-bordered fullheight-min">
+      <div class="card-header">
+        <div class="header-flex-container">
+          <div class="card-title col-4">
+          </div>          
+        </div>
+      </div>
+      <div class="card-body">
+
+    <form>
+      <div class="form-group form-inline">
+          <div class="inner-addon right-addon">
+          <i class="glyphicon glyphicon-search"></i>
+          <input class="form-control ml-2" type="text" style="width: 300px;" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+        </div>
+          <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" sortable="dealership_name" (sort)="onSort($event)">Dealership Name</th>
+          <th scope="col" sortable="city_district" (sort)="onSort($event)">City/District</th>
+          <th scope="col" sortable="distributor_name" (sort)="onSort($event)">Distributor Name</th>
+          <th scope="col" sortable="state" (sort)="onSort($event)">State Name</th>
+          <th scope="col" sortable="contact" (sort)="onSort($event)">Contact Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let dealer of dealers$ | async">
+          <th scope="row">{{ dealer.id }}</th>
+          <td><ngb-highlight [result]="dealer.dealership_name" [term]="service.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="dealer.city_district" [term]="service.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="dealer.distributor_name" [term]="service.searchTerm"></ngb-highlight></td>
+          <td><ngb-highlight [result]="dealer.state" [term]="service.searchTerm"></ngb-highlight></td>      
+          <td><ngb-highlight [result]="dealer.contact" [term]="service.searchTerm"></ngb-highlight></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+        </ngb-pagination>
+      </div>
+
+    </form>
+
+  </div>
+  </div>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col" sortable="dealership_name" (sort)="onSort($event)">Dealership Name</th>
-      <th scope="col" sortable="city_district" (sort)="onSort($event)">City/District</th>
-      <th scope="col" sortable="distributor_name" (sort)="onSort($event)">Distributor Name</th>
-      <th scope="col" sortable="state" (sort)="onSort($event)">State Name</th>
-      <th scope="col" sortable="contact" (sort)="onSort($event)">Contact Number</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let dealer of dealers$ | async">
-      <th scope="row">{{ dealer.id }}</th>
-      <td><ngb-highlight [result]="dealer.dealership_name" [term]="service.searchTerm"></ngb-highlight></td>
-      <td><ngb-highlight [result]="dealer.city_district" [term]="service.searchTerm"></ngb-highlight></td>
-      <td><ngb-highlight [result]="dealer.distributor_name" [term]="service.searchTerm"></ngb-highlight></td>
-      <td><ngb-highlight [result]="dealer.state" [term]="service.searchTerm"></ngb-highlight></td>      
-      <td><ngb-highlight [result]="dealer.contact" [term]="service.searchTerm"></ngb-highlight></td>
-    </tr>
-    </tbody>
-  </table>
-
-  <div class="d-flex justify-content-between p-2">
-    <ngb-pagination
-      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-    </ngb-pagination>
   </div>
-
-</form>
