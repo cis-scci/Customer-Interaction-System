@@ -1,0 +1,18 @@
+:host ::ng-deep  {
+    .card .card-body {    
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }   
+
+    .was-validated {
+      input.ng-invalid,  
+      select.ng-invalid {
+          border: 1px solid lightcoral;          
+      }
+      input.ng-valid, 
+      select.ng-valid {
+          border: 1px solid lightgreen;
+      }
+  }
+    
+}

@@ -1,0 +1,37 @@
+{
+  "app_id": "",
+  "app_name": "Customer Interaction System",
+  "app_desc": "Customer Interaction System",
+  "app_icon": "assets/images/icon-hexbluelight.svg#icon-hexbluelight",
+  "data_type": "full",
+  "app_modules": [
+    {
+      "id": 1,
+      "name": "Sales Person",
+      "desc": "Various module dashboards for quick access, select any.",
+      "route": "/module",
+      "icon": "assets/images/edit-3.svg",
+      "css": "",
+      "sub_modules": [
+        {
+          "id": 1,
+          "name": "Distribute",
+          "desc": "",
+          "route": "/Distribute",
+          "icon": "",
+          "css": ""
+        } 
+      ]
+    }
+  ],
+
+  "app_routes": {
+    "_distributers": {
+      "getDistributerList": {
+        "desc": "Get Distributer List",
+        "method": "POST",
+        "url": ""
+      }
+    } 
+  }
+}
