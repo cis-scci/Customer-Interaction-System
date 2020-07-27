@@ -1,25 +1,13 @@
-th[sortable] {
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
-  /* enable absolute positioning */
-.inner-addon { 
-  position: relative; 
+table {
+  width: 100%;
 }
 
-/* style icon */
-.inner-addon .glyphicon {
-position: absolute;
-padding: 10px;
-pointer-events: none;
+th.mat-sort-header-sorted {
+  color: black;
 }
 
-/* align icon */
-.left-addon .glyphicon  { left:  0px;}
-.right-addon .glyphicon { right: 0px;}
 
-/* add padding  */
-.left-addon input  { padding-left:  30px; }
-.right-addon input { padding-right: 30px; }
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+  opacity: 0.54 !important;
+  transform: translateY(0px) !important;  
+}

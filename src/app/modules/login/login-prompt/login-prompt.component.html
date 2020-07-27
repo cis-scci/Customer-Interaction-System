@@ -1,30 +1,34 @@
 
       <div class="d-md-flex align-items-center fullheight p-5 justify-content-center">
+      <div class="container">
 
-        <div class="card" style="width: 35rem;height: 20rem;border-radius: 25px;">
-          <div class="card-body">
-            <h3 class="card-title" style="text-align: center;font-size: xx-large;">Log In</h3>
-            <form class="app-form needs-validation" autocomplete="off" novalidate name="loginForm" id="loginForm" [formGroup]="loginFormGroup">
-              <div class="form-group">
-                  
-                  <input type="username" name="username" placeholder="eMail Id" formControlName="username" class="form-control font-16">
+        <div class="row">
+          <div class="col-md-3"></div>        
+          <div class="col-md-6">
+            <div class="card" style="border-radius: 25px;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;font-size: xx-large;">Log In</h3>
+                <form class="app-form needs-validation" novalidate name="loginForm" id="loginForm" [formGroup]="loginFormGroup">
+                  <mat-form-field class="full-width-input">
+                    <input matInput placeholder="eMail Id" type="text" autocomplete="nope" formControlName="username">
+                    <mat-error>
+                      Please provide a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width-input">
+                    <input matInput type="password" autocomplete="new-password" placeholder="Password" formControlName="password">
+                    <mat-error>
+                      Please provide a valid password
+                    </mat-error>
+                  </mat-form-field>
+                  <div *ngIf="errMessage !== '&nbsp;&nbsp;&nbsp;&nbsp;'" class="help-block text-danger text-center">{{errMessage}}</div><br>        
+                  <button (click)="login($event)" class="btn btn-primary btn-app logo-center" style="background-color: rgb(108, 108, 199);width: 120px;border-radius: 25px;">Log In</button>                  
+                </form>
+                <a style="float: right;">Forgot Password</a>
               </div>
-    
-              <div class="form-group">
-                  <input type="password" autocomplete="new-password" placeholder="Password" name="password" formControlName="password" class="form-control font-16">
-              </div>
-    
-              <div *ngIf="errMessage !== '&nbsp;&nbsp;&nbsp;&nbsp;'" class="help-block text-danger text-center">{{errMessage}}</div><br>
-    
-              <button (click)="login($event)" class="btn btn-primary btn-app logo-center" style="background-color: rgb(108, 108, 199);width: 120px;border-radius: 25px;">Log In</button>
-              
-            </form>
-            <!-- <a style="float: right;">Forgot Password</a>   -->
+            </div>
           </div>
-          
+        <div class="col-md-3"></div>
         </div>
-        
-
-      
       </div>
-    
+      </div>

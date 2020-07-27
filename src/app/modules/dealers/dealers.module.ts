@@ -2,22 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DealersComponent } from './dealers.component';
 import { DealersRoutingModule } from './dealers-routing.module';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ;
-import { NgbdSortableHeader } from './sortable.directive';
-
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 @NgModule({
-  declarations: [DealersComponent,NgbdSortableHeader],
+  declarations: [DealersComponent],
   imports: [
     CommonModule,
     DealersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
-    AccordionModule.forRoot(),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDividerModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class DealersModule { }

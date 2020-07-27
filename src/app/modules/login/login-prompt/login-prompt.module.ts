@@ -5,6 +5,8 @@ import { LoginPromptRoutingModule } from './login-prompt-routing.module';
 import { LoginPromptComponent } from './login-prompt.component';
 
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [LoginPromptComponent],
@@ -12,7 +14,10 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    LoginPromptRoutingModule
+    LoginPromptRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class LoginPromptModule { }

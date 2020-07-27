@@ -1,53 +1,57 @@
 <div class="container-fluid">
   <div class="table-container">
-    <div class="card card-bordered fullheight-min">
-      <div class="card-header">
-        <div class="header-flex-container">
-          <div class="card-title col-4">
-          </div>          
-        </div>
-      </div>
+    <div class="card card-bordered fullheight-min">      
       <div class="card-body">
+        
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input type="text" autocomplete="false" (keyup)="applyFilter($event.target.value)" matInput placeholder="Search">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>          
+        </form>
 
-    <form>
-      <div class="form-group form-inline">
-          <div class="inner-addon right-addon">
-          <i class="glyphicon glyphicon-search"></i>
-          <input class="form-control ml-2" type="text" style="width: 300px;" name="searchTerm" [(ngModel)]="service.searchTerm"/>
-        </div>
-          <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
-      </div>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col" sortable="dealership_name" (sort)="onSort($event)">Dealership Name</th>
-          <th scope="col" sortable="city_district" (sort)="onSort($event)">City/District</th>
-          <th scope="col" sortable="distributor_name" (sort)="onSort($event)">Distributor Name</th>
-          <th scope="col" sortable="state" (sort)="onSort($event)">State Name</th>
-          <th scope="col" sortable="contact" (sort)="onSort($event)">Contact Number</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let dealer of dealers$ | async">
-          <th scope="row">{{ dealer.id }}</th>
-          <td><ngb-highlight [result]="dealer.dealership_name" [term]="service.searchTerm"></ngb-highlight></td>
-          <td><ngb-highlight [result]="dealer.city_district" [term]="service.searchTerm"></ngb-highlight></td>
-          <td><ngb-highlight [result]="dealer.distributor_name" [term]="service.searchTerm"></ngb-highlight></td>
-          <td><ngb-highlight [result]="dealer.state" [term]="service.searchTerm"></ngb-highlight></td>      
-          <td><ngb-highlight [result]="dealer.contact" [term]="service.searchTerm"></ngb-highlight></td>
-        </tr>
-        </tbody>
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        <!-- Dealership Name Column -->
+        <ng-container matColumnDef="dealership_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Dealership Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.dealership_name}} </td>
+        </ng-container>
+      
+        <!-- Distributor Name Column -->
+        <ng-container matColumnDef="distributor_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Distributor Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.distributor_name}} </td>
+        </ng-container>
+      
+        <!-- City/District Column -->
+        <ng-container matColumnDef="city_district">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> City/District </th>
+          <td mat-cell *matCellDef="let element"> {{element.city_district}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
+          <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contact">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
+        </ng-container>
+        
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
 
-      <div class="d-flex justify-content-between p-2">
-        <ngb-pagination
-          [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-        </ngb-pagination>
-      </div>
-
-    </form>
 
   </div>
   </div>

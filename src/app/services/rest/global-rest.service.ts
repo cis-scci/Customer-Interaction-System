@@ -86,9 +86,7 @@ export class GlobalRestService {
 
   private updateHeaders() {
     this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'q=0.8;application/json;q=0.9',
-      'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+      'Content-Type': 'application/json'
     });
     this.httpHeaderOptions = { headers: this.headers };
     this.optionsDelete = { headers: this.headers };

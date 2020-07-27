@@ -1,44 +1,36 @@
-import {DecimalPipe} from '@angular/common';
-import {Component, QueryList, ViewChildren, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import { PrimaryHeaderService } from '../layout/primary-header/primary-header.service';
-import {Dealer} from './dealer';
-import {DealerService} from './dealer.service';
-import {NgbdSortableHeader, SortEvent} from './sortable.directive';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {Dealers} from './dealers';
 
 @Component({
   selector: 'app-dealers',
   templateUrl: './dealers.component.html',
-  styleUrls: ['./dealers.component.scss'],
-  providers: [DealerService, DecimalPipe]
+  styleUrls: ['./dealers.component.scss']
 })
 export class DealersComponent implements OnInit {
 
-  dealers$: Observable<Dealer[]>;
-  total$: Observable<number>;
+  displayedColumns: string[] = ['id', 'dealership_name', 'distributor_name','city_district','state','contact'];
+  dataSource = new MatTableDataSource(Dealers);
 
-  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(public service: DealerService,private primaryHeader: PrimaryHeaderService) {
-    this.dealers$ = service.dealers$;
-    this.total$ = service.total$;
-  }
+  constructor(private primaryHeader: PrimaryHeaderService) {}
 
   ngOnInit() {
     //setting page title
     this.primaryHeader.pageTitle.next("Customer Interaction System");
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
-  onSort({column, direction}: SortEvent) {
-    // resetting other headers
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-
-    this.service.sortColumn = column;
-    this.service.sortDirection = direction;
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
 }

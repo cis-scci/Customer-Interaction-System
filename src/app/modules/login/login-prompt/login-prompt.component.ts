@@ -18,6 +18,7 @@ export class LoginPromptComponent implements OnInit {
   public errMessage = "";
   private restPrams : RestApiParams;
   private appSettingsJson : any = {};
+  public loginInvalid: boolean;
 
   constructor(private restService: GlobalRestService, private configService : AppsettingsConfService, private router : Router) { 
     
@@ -46,7 +47,7 @@ export class LoginPromptComponent implements OnInit {
     this.errMessage = "";
     const username : string = this.loginFormGroup.controls.username.value;
     const password : string = this.loginFormGroup.controls.password.value;
-
+    this.loginInvalid = false;
     // let httpPostParams = { 
     //   Username : username, 
     //   Password : password 
