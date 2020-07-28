@@ -12,7 +12,7 @@ import { PrimaryHeaderComponent } from './primary-header/primary-header.componen
 import { FilterToggleModule } from '../../directives/filter-toggle/filter-toggle.module';
 import { PrimaryHeaderService } from './primary-header/primary-header.service';
 import { MenuToggleModule } from '../../directives/menu-toggle/menu-toggle.module';
-
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { MenuToggleModule } from '../../directives/menu-toggle/menu-toggle.modul
     LayoutRoutingModule,
     AngularSvgIconModule,
     MenuToggleModule,
-    FilterToggleModule
+    FilterToggleModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [PrimaryHeaderService]
 })

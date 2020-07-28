@@ -22,7 +22,7 @@ export class DealersComponent implements OnInit {
 
   ngOnInit() {
     //setting page title
-    this.primaryHeader.pageTitle.next("Customer Interaction System");
+    this.primaryHeader.pageTitle.next("Dealers");
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

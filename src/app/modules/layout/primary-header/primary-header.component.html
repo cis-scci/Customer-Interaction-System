@@ -1,18 +1,16 @@
 <div class="header-container">
   <div class="container-fluid">
     <div class="row header-row">
-      <div class="col-3 mob-menu-block">
+      <div class="col mob-menu-block">
         <a class="head-icon" menuToggle filterClose>
           <svg-icon class="icon-menu" src="assets/images/menu.svg"></svg-icon>
         </a>
       </div>
-      <div class="col-3 header-back-button">
-        <!-- <button *ngIf="config.show_button" id ="back-button" type="button" class="btn btn-sm btn-default float-left" (click)="navigate()"> Back</button> -->
-      </div>
-      <div class="col-6 heading-block">{{page_title}}</div>
-      <div class="col-3 user-block">
-        <div class="btn-group" dropdown>
-          <span class="pl-2 pr-2 text-primary txt-user-details"><b>Amit Sharma</b></span>
+   
+      <div class="col-12 heading-block">{{page_title}}</div>
+      <div class=" user-block user-area">
+        <span class="pl-2 pr-2 text-primary txt-user-details" style="padding-top: 5px;"><b>Amit Sharma</b></span>
+        <div class="btn-group" dropdown>          
           <button id="button-autoclose1" dropdownToggle type="button" class="btn btn-link"
             aria-controls="dropdown-autoclose1" placement="right">
             <svg-icon class="icon-user" src="assets/images/user.svg"></svg-icon>
@@ -20,13 +18,44 @@
           </button>
           <ul id="dropdown-autoclose1" *dropdownMenu class="dropdown-menu dropdown-list dropdown-menu-right" role="menu"
             aria-labelledby="button-autoclose1">
-            <li role="menuitem">
-              <span class="pl-2 pr-2 text-primary txt-user-details">Admin</span>
+            <li role="menuitem ">
+              <span class="pl-2 pr-2 text-primary txt-user-details"><b>Amit Sharma</b></span>
             </li>
-            <li role="menuitem"><span class="pl-2 pr-2 ">SSCI pvt ltd.</span></li>
+            <li role="menuitem" class="type-container type-user"><span class="pl-2 pr-2 type-style">Admin</span></li>
             <div class="dropdown-divider"></div>
-            <li role="menuitem"><a class="dropdown-item pl-2 pr-2" href="#">Edit Profile</a></li>
-            <li role="menuitem"><a class="dropdown-item pl-2 pr-2" href="#">Change Password</a></li>
+            
+            <li role="menuitem">
+              <a class="dropdown-item text_L pl-2 pr-2">
+                <div class="row">
+                  <div class="col-5"></div>
+                  <div class="col-1 b-4">
+                    <svg-icon src="assets/icons/user.svg"></svg-icon>
+                  </div>
+                  <div class="col-5"> Edit Profile</div>
+                </div>
+              </a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item text_L pl-2 pr-2">
+                <div class="row">
+                  <div class="col-5"></div>
+                  <div class="col-1">
+                    <svg-icon src="assets/icons/key.svg"></svg-icon>
+                  </div>
+                  <div class="col-5"> Change Password</div>
+                </div>
+              </a>
+            </li>
+            <li role="menuitem"><a class="dropdown-item text_L pl-2 pr-2" (click)="logout()">
+                <div class="row">
+                  <div class="col-5"></div>
+                  <div class="col-1 ml-1">
+                    <svg-icon src="assets/icons/power.svg"></svg-icon>
+                  </div>
+                  <div class="col-5">Logout</div>
+                </div>
+              </a>
+            </li>
           </ul>
         </div>
       </div>

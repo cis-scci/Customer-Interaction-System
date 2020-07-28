@@ -47,7 +47,6 @@
                 }  
             }
             label{
-                font-family: Montserrat;
                 font-size: 13px;
                 letter-spacing: .06em;
                 text-transform: uppercase;
@@ -125,8 +124,7 @@
                     margin: 0;
                     display: block;
                     opacity: 1;
-                    &:not(.error){
-                        font-family:'Montserrat';
+                    &:not(.error){                        
                         font-size: 10.5px;
                         letter-spacing: 0.06em;
                         text-transform: uppercase;
@@ -174,7 +172,6 @@
             
     }
     .title{
-        font-family: 'Montserrat';
         text-transform: uppercase;
         display: inline-block;
         letter-spacing: 0.06em;
@@ -209,7 +206,6 @@
 }
 
 .btn {
-    font-family: Montserrat;
     font-size: 13px;
     letter-spacing: .06em;
     text-transform: uppercase;
@@ -217,7 +213,6 @@
 }
 
 .text-muted {
-    font-family: Montserrat;
     font-size: 11px;
     letter-spacing: .06em;
     text-transform: uppercase;
@@ -228,7 +223,6 @@
 
 
 .strong{
-    font-family: 'Montserrat';
     text-transform: uppercase;
     display: inline-block;
     letter-spacing: 0.06em;

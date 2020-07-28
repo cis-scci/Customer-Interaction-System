@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Compiler } from '@angular/core';
 import { PrimaryHeaderService } from './primary-header.service';
 import { Subscription, config } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 @Component({
   selector: 'app-primary-header',
   templateUrl: './primary-header.component.html',
@@ -19,7 +20,9 @@ export class PrimaryHeaderComponent implements OnInit, OnDestroy {
   //   this.page_title = pageTitleValue;
   // }
   constructor(private primaryHeaderService: PrimaryHeaderService,
-              private router: Router
+              private router: Router,
+              private _compiler: Compiler,
+              private authService:AuthService
               ) { }
   ngOnInit() {
     //Setting up page title
@@ -50,5 +53,10 @@ export class PrimaryHeaderComponent implements OnInit, OnDestroy {
       "navigate_url": "",
       "page_title" : ""
     }
+  }
+
+  logout() {
+    this._compiler.clearCache();
+    this.authService.logout();
   }
 }

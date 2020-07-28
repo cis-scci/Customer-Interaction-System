@@ -11,3 +11,9 @@ main{
         opacity: 0.4;
     }
 }
+
+@media(max-width: 600px) {
+ .main{
+    margin: 100px 15px;
+ }
+}

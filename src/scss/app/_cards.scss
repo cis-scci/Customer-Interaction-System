@@ -31,7 +31,6 @@
             padding-top: 0;
         }
         .card-title{
-            font-family: 'Montserrat';
             text-transform: uppercase;
             display: inline-block;
             letter-spacing: 0.06em;
@@ -44,10 +43,7 @@
             text-overflow: ellipsis;
             -webkit-text-stroke:0px;
             filter: alpha(opacity=40);
-            @include transition(opacity .3s ease);
-            & + .card-body{
-
-            }
+            @include transition(opacity .3s ease);            
         }
         .card-controls{
             float: right;
@@ -137,7 +133,6 @@
         float: right;
         .card-title {
             h4 {
-                font-family: 'Montserrat';
                 font-size: 16px;
                 text-transform: uppercase;
                 color: $color-master-lighter;
@@ -472,13 +467,6 @@
         opacity: 0.1;
     }
 }
-.card-icon-refresh-lg-master{
-    //background-image:url('#{$base-img-url}/progress/progress-circle-lg-master-static.svg');
-}
-
-.card-icon-refresh-lg-white{
-    //background-image:url('#{$base-img-url}/progress/progress-circle-lg-white-static.svg');
-}
 
 .card-icon-refresh-lg-master-animated,
 .card-icon-refresh-lg-white-animated{
@@ -491,12 +479,6 @@
     &.active{
         opacity: 1
     }
-}
-.card-icon-refresh-lg-master-animated{
-    //background-image:url('#{$base-img-url}/progress/progress-circle-lg-master.svg');
-}
-.card-icon-refresh-lg-white-animated{
-   // background-image:url('#{$base-img-url}/progress/progress-circle-lg-white.svg');
 }
 
 

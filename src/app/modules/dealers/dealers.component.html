@@ -10,47 +10,51 @@
           </mat-form-field>          
         </form>
 
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <div class="example-container mat-elevation-z8">
 
-        <!-- Id Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
+        <mat-table [dataSource]="dataSource" matSort>
       
-        <!-- Dealership Name Column -->
-        <ng-container matColumnDef="dealership_name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Dealership Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.dealership_name}} </td>
-        </ng-container>
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
+          </ng-container>
       
-        <!-- Distributor Name Column -->
-        <ng-container matColumnDef="distributor_name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Distributor Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.distributor_name}} </td>
-        </ng-container>
-      
-        <!-- City/District Column -->
-        <ng-container matColumnDef="city_district">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> City/District </th>
-          <td mat-cell *matCellDef="let element"> {{element.city_district}} </td>
-        </ng-container>
 
-        <ng-container matColumnDef="state">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
-          <td mat-cell *matCellDef="let element"> {{element.state}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="contact">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
-          <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
-        </ng-container>
-        
+          <ng-container matColumnDef="dealership_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Dealership Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="dealership_name"> {{row.dealership_name}} </mat-cell>
+          </ng-container>
       
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+
+          <ng-container matColumnDef="distributor_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Distributor Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="distributor_name"> {{row.distributor_name}} </mat-cell>
+          </ng-container>
+      
+
+          <ng-container matColumnDef="city_district">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> City/District </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="city_district"> {{row.city_district}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="state"> {{row.state}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="contact">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="contact"> {{row.contact}} </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+      
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+      </div>
 
 
   </div>
