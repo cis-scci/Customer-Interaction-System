@@ -12,6 +12,8 @@ export class PrimaryHeaderComponent implements OnInit, OnDestroy {
   public page_title: string = "";
   public config : any;
   public subscriptions: Subscription[] = [];
+  public user_name: any;
+  public user_type: any
   //Setting up page title
   // @Input() get pageTitle() {
   //   return this.pageTitle;
@@ -27,6 +29,8 @@ export class PrimaryHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     //Setting up page title
     this.setPageTitle();
+    this.user_name = localStorage.getItem('user_name');
+    this.user_type = localStorage.getItem('user_type');
     // this.setBackButtonConfig();
     // this.config = {
     //   "show_button": false,

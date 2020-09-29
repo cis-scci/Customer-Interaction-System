@@ -1,4 +1,9 @@
-<div class="container-fluid">
+<div class="wrapper" *ngIf="loader">   
+  <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+</div>
+
+
+<div class="container-fluid mt-2">
   <div class="table-container">
     <div class="card card-bordered fullheight-min">      
       <div class="card-body">
@@ -10,55 +15,57 @@
           </mat-form-field>          
         </form>
 
-      <div class="example-container mat-elevation-z8">
+      <div class="example-container mat-elevation-z8"  *ngIf= "!loader">
 
-        <mat-table [dataSource]="dataSource" matSort>
-      
-          <!-- ID Column -->
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
-          </ng-container>
+        <mat-table [dataSource]="dataSource" matSort>     
       
 
-          <ng-container matColumnDef="dealership_name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Dealership Name </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="dealership_name"> {{row.dealership_name}} </mat-cell>
+          <ng-container matColumnDef="DealershipName">
+            <mat-header-cell *matHeaderCellDef > Dealership Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="DealershipName"> {{row.DealershipName}} <a style="color: black;cursor: pointer;" (click)="navigateToDetail(row.DealerID)"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></mat-cell>
           </ng-container>
       
 
-          <ng-container matColumnDef="distributor_name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Distributor Name </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="distributor_name"> {{row.distributor_name}} </mat-cell>
+          <ng-container matColumnDef="DistributorName">
+            <mat-header-cell *matHeaderCellDef > Distributor Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="DistributorName"> {{row.DistributorName}} </mat-cell>
           </ng-container>
       
 
-          <ng-container matColumnDef="city_district">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> City/District </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="city_district"> {{row.city_district}} </mat-cell>
+          <ng-container matColumnDef="DistrictName">
+            <mat-header-cell *matHeaderCellDef > City/District </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="city_district"> {{row.DistrictName}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="state">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="state"> {{row.state}} </mat-cell>
+          <ng-container matColumnDef="StateName">
+            <mat-header-cell *matHeaderCellDef > State </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="StateName"> {{row.StateName}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="contact">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="contact"> {{row.contact}} </mat-cell>
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef > Contact Number </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="phone"> {{row.phone}} </mat-cell>
           </ng-container>
+
+          <ng-container matColumnDef="Action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="Action"> <a (click)="addCard(row.DealershipName,row.DealerID,row.phone)" style="cursor: pointer;color: #337ab7;">Create cart</a></mat-cell>
+          </ng-container>
+
+          dealerName
       
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;">
           </mat-row>
         </mat-table>
       
-        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+
       </div>
-
-
-  </div>
-  </div>
-  </div>
+      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
 
   </div>
+  </div>
+  </div>
+
+</div>
+  

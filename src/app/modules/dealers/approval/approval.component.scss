@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+.wrapper {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  height: calc(100vh - 20px);    
+}
+.dot {
+  height: 15px;
+  width: 15px;  
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.productDetailWrapper {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  height: 320px;    
+}

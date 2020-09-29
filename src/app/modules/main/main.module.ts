@@ -6,13 +6,15 @@ import { MainComponent } from './main.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { MenuToggleModule } from '../../directives/menu-toggle/menu-toggle.module';
 import { FilterToggleModule } from '../../directives/filter-toggle/filter-toggle.module';
+import { FusionChartsModule } from 'angular-fusioncharts';
 @NgModule({
   imports: [
     CommonModule,
     MainRoutingModule,
     AngularSvgIconModule,
     MenuToggleModule,
-    FilterToggleModule
+    FilterToggleModule,
+    FusionChartsModule
   ],
   declarations: [MainComponent]
 })

@@ -2,7 +2,7 @@
     "application_guid": "",
     "application_type": "development",
     "token" : {
-        "url" : "https://cis/api/v1/token",
+        "url" : "http://dev.scci.co.in:88/V1/CIS/api/Login/StaffLogin?email=#email&password=#password",
         "method" : "POST"
     },
     "appmodulesandroutes" :{

@@ -26,11 +26,53 @@
   ],
 
   "app_routes": {
-    "_distributers": {
-      "getDistributerList": {
-        "desc": "Get Distributer List",
+    "_login": {
+      "userLogin": {
+        "desc": "Login",
         "method": "POST",
-        "url": ""
+        "url": "http://dev.scci.co.in:88/V1/CIS/api/Login/StaffLogin?email=#email&password=#password"
+      }
+    },    
+    "_dealers": {
+      "getDealerList": {
+        "desc": "Get Dealer List",
+        "method": "GET",
+        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/StaffDealerList?StaffID=#staffId"
+      },
+      "getDealerDetail": {
+        "desc": "Get Dealer Detail",
+        "method": "GET",
+        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/DealerDetails?DealerID=#dealerId"
+      },
+      "getOrderDetail": {
+        "desc": "Get Order Detail",
+        "method": "GET",
+        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/OrderDetails?DealerID=#dealerId&OrderStatusID=#orderStatus"
+      },
+      "sendSMS": {
+        "desc": "Send SMS",
+        "method": "GET",
+        "url": "http://msg.wemonde.com/api/sendSMS?token=9beb04432690e175319db4fbc75e406f&senderid=GCCLUB&route=1&unicode=1&number=#number&message=#message"
+      },
+      "getProductCategory": {
+        "desc": "Get Available Product Categories",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/PlatinumOrdering/api/Order/GetAvailableProductCategoryForPlatinumUsers"
+      },
+      "getProducts": {
+        "desc": "Get Available Products",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/PlatinumOrdering/api/Order/GetAvailableProductsForPlatinumUsers"
+      },
+      "getCalculateNetPayableDetails": {
+        "desc": "Get Calculate NetPayable",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/PlatinumOrdering/api/Order/CalculateNetPayableForAllPaymentModePlatinumUsers_V_EMI"
+      },
+      "SaveDealerOrderForPlatinumUsers": {
+        "desc": "Send order for approval",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/PlatinumOrdering/api/Order/SaveDealerOrderForPlatinumUsers"
       }
     } 
   }

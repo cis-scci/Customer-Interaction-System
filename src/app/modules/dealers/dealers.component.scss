@@ -66,3 +66,10 @@ th.mat-sort-header-sorted {
     background-color: #f6f6f6;
   }
 }
+
+.wrapper {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  height: calc(100vh - 20px);    
+  }

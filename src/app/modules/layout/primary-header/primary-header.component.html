@@ -1,4 +1,4 @@
-<div class="header-container">
+<div class="header-container" style="background: #0F729B;height: 70px;">
   <div class="container-fluid">
     <div class="row header-row">
       <div class="col mob-menu-block">
@@ -7,9 +7,9 @@
         </a>
       </div>
    
-      <div class="col-12 heading-block">{{page_title}}</div>
-      <div class=" user-block user-area">
-        <span class="pl-2 pr-2 text-primary txt-user-details" style="padding-top: 5px;"><b>Amit Sharma</b></span>
+      <div class="col-12 heading-block ml-4">{{page_title}}</div>
+      <div class="mt-2 user-block user-area">
+        <span class="pl-2 pr-2 text-primary txt-user-details" style="padding-top: 5px;"><b style="color:white;">{{user_name}}</b></span>
         <div class="btn-group" dropdown>          
           <button id="button-autoclose1" dropdownToggle type="button" class="btn btn-link"
             aria-controls="dropdown-autoclose1" placement="right">
@@ -19,12 +19,12 @@
           <ul id="dropdown-autoclose1" *dropdownMenu class="dropdown-menu dropdown-list dropdown-menu-right" role="menu"
             aria-labelledby="button-autoclose1">
             <li role="menuitem ">
-              <span class="pl-2 pr-2 text-primary txt-user-details"><b>Amit Sharma</b></span>
+              <span class="pl-2 pr-2 text-primary txt-user-details"><b>{{user_name}}</b></span>
             </li>
-            <li role="menuitem" class="type-container type-user"><span class="pl-2 pr-2 type-style">Admin</span></li>
+            <li role="menuitem" class="type-container type-user"><span class="pl-2 pr-2 type-style">{{user_type}}</span></li>
             <div class="dropdown-divider"></div>
             
-            <li role="menuitem">
+            <!-- <li role="menuitem">
               <a class="dropdown-item text_L pl-2 pr-2">
                 <div class="row">
                   <div class="col-5"></div>
@@ -45,7 +45,7 @@
                   <div class="col-5"> Change Password</div>
                 </div>
               </a>
-            </li>
+            </li> -->
             <li role="menuitem"><a class="dropdown-item text_L pl-2 pr-2" (click)="logout()">
                 <div class="row">
                   <div class="col-5"></div>

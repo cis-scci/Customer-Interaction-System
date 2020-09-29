@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginPromptRoutingModule } from './login-prompt-routing.module';
 import { LoginPromptComponent } from './login-prompt.component';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
@@ -17,7 +17,8 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     LoginPromptRoutingModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ]
 })
 export class LoginPromptModule { }

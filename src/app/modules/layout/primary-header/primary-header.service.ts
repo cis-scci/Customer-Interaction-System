@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PrimaryHeaderService {
   public pageTitle: BehaviorSubject<any> = new BehaviorSubject<any>(" ");
+  public dealerName: BehaviorSubject<any> = new BehaviorSubject<any>(" "); 
   constructor() {}
   public config: any = {
     "show_button": false,

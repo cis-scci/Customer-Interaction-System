@@ -1,10 +1,10 @@
 .az-iconbar-show {
   @include media-breakpoint-down(md) {
-    .az-iconbar { 
+    .az-iconbar {
       display: block;
      }
-    .az-iconbar-aside { 
-      display: block; 
+    .az-iconbar-aside {
+      display: block;
     }
   }
 }
@@ -20,7 +20,7 @@
   z-index: 500;
   border-right: 1px solid $icon-logo-border;
 
-  @include media-breakpoint-up(lg) { 
+  @include media-breakpoint-up(lg) {
     display: block;
   }
 
@@ -28,7 +28,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: $page-head-height;
+    // height: $page-head-height;
+    height: 70px;
     background-color: $icon-logo-bg;
     border-bottom: 1px solid $icon-logo-border;
   }
@@ -69,7 +70,7 @@
 
 .az-iconbar-aside {
   width: $az-width-iconbar-aside;
-  height: 100%;
+  // height: 100%;
   border-right: 1px solid $icon-logo-border;
   position: fixed;
   top: 0;
@@ -93,12 +94,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  height: $page-head-height;
+  // height: $page-head-height;
+  height: 70px;
   background-color: $iconbar-aside-header;
   border-bottom: 1px solid $icon-logo-border;
   //padding-left: 0;
 
-  .az-logo { 
+  .az-logo {
     display: inline-block;
     letter-spacing: .06em;
     font-size: 18px;
@@ -132,7 +134,7 @@
 .az-iconbar-body {
   padding: 20px;
   height: calc(100vh - 68px);
-  
+
   .nav {
     flex-direction: column;
     padding-top: 10px;

@@ -1,0 +1,585 @@
+<div class="wrapper" *ngIf="loader">   
+  <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+</div>
+
+<div style="margin:0 auto;" class="container-fluid" *ngIf= "!loader && !showSms">
+    <div class="row">
+        <div class="col-7">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8"> <h1 style="text-align: center;">{{dealerDetail.DealershipName}} <img src="assets/images/crown.PNG" alt="no image"> </h1></div>
+             </div>   
+             <div class="row">
+                <div class="col-6"></div>
+                <div class="col-3"> <h1 style="text-align: center;background: #f1fae7;border-radius: 15px;">{{dealerDetail.DealerTypeName}}</h1></div>
+                <div class="col-3"></div>
+             </div>   
+        </div>
+
+        <div class="col-5">
+            <div class="row">
+                <div class="col-7 mt-3" style="background: #fdfacf;border-radius: 15px;"> <h3 style="text-align: center;">Member from {{dealerDetail.BusinessWithSCCI}}</h3> </div>
+                <div class="col-5"></div>
+             </div>   
+        </div>
+    </div>
+
+    <div class="row ml-5 mr-5">
+        <div class="col-3">
+            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #c4bff8 !important;">
+                <h1 style="text-align: center;font-size: 60px;">{{dealerDetail.OrderCount}}</h1>
+                <h1 style="text-align: center;">Orders</h1>
+             </mat-card>
+        </div>
+        <div class="col-3">
+            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #f9b694 !important;">
+                <h1 style="text-align: center;font-size: 60px;">{{dealerDetail.OrderValue}}</h1>
+                <h1 style="text-align: center;">Business</h1>
+             </mat-card>
+        </div>
+        <div class="col-3">
+            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #4cc5ec !important;">
+                <h1 style="text-align: center;font-size: 60px;">{{dealerDetail.OnlinePaymentPercentage}}%</h1>
+                <h1 style="text-align: center;">Online Payment</h1>
+             </mat-card>
+        </div>
+        <div class="col-3">
+            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #f3d092 !important;">
+                <h1 style="text-align: center;">GPMember</h1>
+                <h1 *ngIf="!dealerDetail.GoldenGatePassHolder" style="text-align: center;color:red">NO <a style="font-size: 20px;color: blue;text-align: right;float: right;">Invite</a></h1>
+                <h1 *ngIf="dealerDetail.GoldenGatePassHolder" style="text-align: center;color:green">YES</h1>
+             </mat-card>
+        </div>
+    </div>
+
+
+    <div class="row ml-5 mr-5 mt-5">
+        <div class="col-3">
+            <mat-card (click)="showDetails(1)" class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #c4bff8 !important;color:#c4bff8;background-color: #ADA6F8;">
+                <h2 style="text-align: center;color: white;font-size: 50px;">Dealer Details</h2>
+             </mat-card>
+        </div>
+        <div class="col-3">
+            <mat-card (click)="showDetails(2)" class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #f9b694 !important;background-color: #f9b694;">
+                <h2 style="text-align: center;color: white;font-size: 50px;">Order Details</h2>
+             </mat-card>
+        </div>
+        <div class="col-3">
+            <mat-card (click)="showDetails(3)" class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #4cc5ec !important;background-color: #4cc5ec;">
+                <h2 style="text-align: center;color: white;font-size: 50px;">Payments</h2>
+             </mat-card>
+        </div>
+        <div class="col-3">
+            <mat-card class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #f3d092 !important;background-color: #f3d092;">
+                <h2 style="text-align: center;color: white;font-size: 50px;">Misc</h2>
+             </mat-card>
+        </div>
+    </div>
+
+
+  <!-- Dealer Details Starts  -->
+    <div *ngIf="showDetailId == 1">
+        <div class="row ml-5 mr-5 mt-5">
+            <div class="col-5 mt-2">
+                <b style="font-size: 25px;color: black;">Dealership Name</b> <br>
+                <mat-form-field class="example-full-width" style="width: 100%;">                                     
+                    <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DealershipName">
+                 </mat-form-field>
+            </div>
+            <div class="col-7">
+                <div class="row">
+                   <div class="col-4">
+                    <h3 style="margin-top: 0px;">GST Number</h3>
+                    <mat-form-field class="example-full-width" style="width: 100%;">                                     
+                        <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.GSTNo">
+                     </mat-form-field>
+                   </div>
+                   <div class="col-4">
+                    <h3 style="margin-top: 0px;">Contact Person Name</h3>
+                    <mat-form-field class="example-full-width" style="width: 100%;">                                     
+                        <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.ContactPerName">
+                     </mat-form-field>
+                   </div>
+                    <div class="col-4">
+                        <h3 style="margin-top: 0px;">Registered Mob. Number</h3>
+                        <mat-form-field class="example-full-width" style="width: 100%;">                                     
+                            <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PhoneNo">
+                         </mat-form-field>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    
+
+
+    <div class="ml-5 mr-5 mt-5">
+        <b style="font-size: 25px;color: black;">Dealership Registered Address</b>
+       <mat-card>
+        <div class="row">               
+            <div class="col-6">
+                <h3>Address</h3>
+                 <mat-form-field appearance="outline" style="width: 100%;">                    
+                    <textarea matInput style="font-size: 30px;height: 150px;font-weight: 300;color: #373e43;text-align: center;" disabled [value]="dealerDetail.Address"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 style="margin-top: 0px;">District</h3>
+                        <mat-form-field class="example-full-width">                                     
+                            <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistrictName">
+                         </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <h3 style="margin-top: 0px;">PIN</h3>
+                        <mat-form-field class="example-full-width">                                     
+                            <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PINCode">
+                         </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h3 style="margin-top: 0px;">State</h3>
+                        <mat-form-field class="example-full-width">                                     
+                            <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.StateName">
+                         </mat-form-field>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+            </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="ml-5 mr-5 mt-5">
+        <b style="font-size: 25px;color: black;">Delivery Address</b>
+       <mat-card>
+        <div class="row">               
+            <div class="col-6">
+                <h3>Address</h3>
+                 <mat-form-field appearance="outline" style="width: 100%;">                    
+                    <textarea matInput style="font-size: 30px;height: 150px;font-weight: 300;color: #373e43;text-align: center;" disabled [value]="dealerDetail.Address"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 style="margin-top: 0px;">District</h3>
+                        <mat-form-field class="example-full-width">                                     
+                            <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistrictName">
+                         </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <h3 style="margin-top: 0px;">PIN</h3>
+                        <mat-form-field class="example-full-width">                                     
+                            <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PINCode">
+                         </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h3 style="margin-top: 0px;">State</h3>
+                        <mat-form-field class="example-full-width">                                     
+                            <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.StateName">
+                         </mat-form-field>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+            </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="ml-5 mr-5 mt-5 mb-5">
+        <b style="font-size: 25px;color: black;">Business Details</b>
+       <mat-card>
+
+        <div class="row">    
+                       
+            <div class="col-4">
+                <h3>Dealing in</h3><br>
+
+               <div class="row">
+                   <div class="col-6">
+                    <section>
+                        <mat-checkbox [checked]="dealerDetail.EngineOils" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Engine Oils</span></mat-checkbox>
+                    </section>
+                   </div>
+                    <div class="col-6">
+                    <section>
+                            <mat-checkbox [checked]="dealerDetail.Coolants" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Coolants</span></mat-checkbox>
+                    </section>
+                    </div>
+
+                    <div class="col-6">
+                    <section>
+                        <mat-checkbox [checked]="dealerDetail.BrakeFluids" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Brake Fluids</span></mat-checkbox>
+                    </section>
+                    </div>
+                    <div class="col-6">
+                    <section>
+                            <mat-checkbox [checked]="dealerDetail.Others" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Others</span></mat-checkbox>
+                    </section>
+                    </div>
+
+               </div>
+
+
+            </div>
+
+            <div class="col-2 mt-5">
+                <h3 style="margin-top: 0px;">Monthly Turnover</h3>
+                <mat-form-field class="example-full-width">                                     
+                    <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" value=">100000">
+                 </mat-form-field>
+            </div>
+
+            <div class="col-3">
+                <h3>Payment Methods</h3><br>
+
+               <div class="row">
+                   <div class="col-12">
+                    <section>
+                        <mat-checkbox [checked]="dealerDetail.IsUpiPreferred" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Electronic</span></mat-checkbox>
+                    </section>
+                   </div>
+                    <div class="col-12">
+                    <section>
+                            <mat-checkbox [checked]="!dealerDetail.IsUpiPreferred" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Traditional</span></mat-checkbox>
+                    </section>
+                    </div>
+               </div>
+
+
+            </div>
+
+            <div class="col-3">
+               <div class="row">                
+                   <div class="col-12">                    
+                    <h3>UPI ID</h3>
+                    <mat-form-field class="example-full-width">                                     
+                        <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.VirtualPaymentAddress">
+                     </mat-form-field>                    
+                   </div>
+                    <div class="col-12">                    
+                    <h3>Paytm Number</h3>
+                    <mat-form-field class="example-full-width">                                     
+                        <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PaytmNo">
+                     </mat-form-field>
+                    </div>
+               </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <h3>Distributor Name</h3>
+                <mat-form-field class="example-full-width" style="width: 100%;">
+                    <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistrictName">
+                 </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <h3>Contact Person Name</h3>
+                <mat-form-field class="example-full-width" style="width: 100%;">
+                    <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistributorContactPerName">
+                 </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <h3>eMail Id</h3>
+                <mat-form-field class="example-full-width" style="width: 100%;">
+                    <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.EMail1">
+                 </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h3>Distributor Address</h3>
+                <mat-form-field class="example-full-width" style="width: 100%;">
+                    <textarea matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistributorAddress"></textarea>
+                 </mat-form-field>
+            </div>
+        </div>    
+      </mat-card>
+    </div>
+
+    </div>
+  <!-- Dealer Details Ends  -->    
+
+
+  <!-- Dealer Details Starts  -->  
+  <div *ngIf="showDetailId == 2">
+
+      <div class="row ml-5 mr-5 mt-5">
+        <div class="col-12 mt-2">
+            <mat-tab-group (selectedTabChange)="getOrderDetails($event)">
+                <mat-tab label="Open"> 
+                    
+                    <div class="container-fluid">
+                        <div class="table-container">
+                          <div class="card card-bordered">
+                            <div class="card-body">
+                              
+                              <!-- <form class="example-form">
+                                <mat-form-field class="example-full-width">
+                                  <input type="text" autocomplete="false" (keyup)="applyFilter($event.target.value)" matInput placeholder="Search">
+                                  <mat-icon matSuffix>search</mat-icon>
+                                </mat-form-field>          
+                              </form> -->
+                      
+                            <div class="example-container mat-elevation-z8"  *ngIf= "!loader">
+                      
+                              <mat-table [dataSource]="dataSource" matSort>     
+                      
+                                <ng-container matColumnDef="OrderID">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Order Id </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="OrderID"> {{row.OrderID}} </mat-cell>
+                                </ng-container>
+                            
+                      
+                                <ng-container matColumnDef="OrderValue">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Order Value </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="OrderValue"> {{row.OrderValue}} </mat-cell>
+                                </ng-container>
+                      
+                                <ng-container matColumnDef="NetPayable">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Net Payable </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="NetPayable"> {{row.NetPayable}} </mat-cell>
+                                </ng-container>
+                      
+                                <ng-container matColumnDef="GeneratedOn">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Generated On </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="GeneratedOn"> {{row.GeneratedOn}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="SuppliedOn">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Supplied On </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" data-label="SuppliedOn"> {{row.SuppliedOn}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="OrderPaymentTypeName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Order Payment Type </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" data-label="OrderPaymentTypeName"> {{row.OrderPaymentTypeName}} </mat-cell>
+                                </ng-container>
+                                  
+                            
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                </mat-row>
+                              </mat-table>
+                            
+                      
+                            </div>
+                            <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
+                      
+                        </div>
+                        </div>
+                        </div>
+                      
+                      </div>                
+                
+                </mat-tab>
+                <mat-tab label="Completed"> 
+                    <div class="container-fluid">
+                        <div class="table-container">
+                          <div class="card card-bordered">
+                            <div class="card-body">
+                              
+                              <!-- <form class="example-form">
+                                <mat-form-field class="example-full-width">
+                                  <input type="text" autocomplete="false" (keyup)="applyFilter($event.target.value)" matInput placeholder="Search">
+                                  <mat-icon matSuffix>search</mat-icon>
+                                </mat-form-field>          
+                              </form> -->
+                      
+                            <div class="example-container mat-elevation-z8"  *ngIf= "!loader">
+                      
+                              <mat-table [dataSource]="dataSource" matSort>     
+                      
+                                <ng-container matColumnDef="OrderID">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Order Id </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="OrderID"> {{row.OrderID}} </mat-cell>
+                                </ng-container>
+                            
+                      
+                                <ng-container matColumnDef="OrderValue">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Order Value </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="OrderValue"> {{row.OrderValue}} </mat-cell>
+                                </ng-container>
+                      
+                                <ng-container matColumnDef="NetPayable">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Net Payable </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="NetPayable"> {{row.NetPayable}} </mat-cell>
+                                </ng-container>
+                      
+                                <ng-container matColumnDef="GeneratedOn">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Generated On </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="GeneratedOn"> {{row.GeneratedOn}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="SuppliedOn">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Supplied On </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" data-label="SuppliedOn"> {{row.SuppliedOn}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="OrderPaymentTypeName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Order Payment Type </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" data-label="OrderPaymentTypeName"> {{row.OrderPaymentTypeName}} </mat-cell>
+                                </ng-container>
+                                  
+                            
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                </mat-row>
+                              </mat-table>
+                            
+                      
+                            </div>
+                            <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
+                      
+                        </div>
+                        </div>
+                        </div>
+                      
+                      </div>
+                 </mat-tab>
+                <mat-tab label="Cancelled"> 
+                    <div class="container-fluid">
+                        <div class="table-container">
+                          <div class="card card-bordered">
+                            <div class="card-body">
+                              
+                              <!-- <form class="example-form">
+                                <mat-form-field class="example-full-width">
+                                  <input type="text" autocomplete="false" (keyup)="applyFilter($event.target.value)" matInput placeholder="Search">
+                                  <mat-icon matSuffix>search</mat-icon>
+                                </mat-form-field>          
+                              </form> -->
+                      
+                            <div class="example-container mat-elevation-z8"  *ngIf= "!loader">
+                      
+                              <mat-table [dataSource]="dataSource" matSort>     
+                      
+                                <ng-container matColumnDef="OrderID">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Order Id </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="OrderID"> {{row.OrderID}} </mat-cell>
+                                </ng-container>
+                            
+                      
+                                <ng-container matColumnDef="OrderValue">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Order Value </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="OrderValue"> {{row.OrderValue}} </mat-cell>
+                                </ng-container>
+                      
+                                <ng-container matColumnDef="NetPayable">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Net Payable </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="NetPayable"> {{row.NetPayable}} </mat-cell>
+                                </ng-container>
+                      
+                                <ng-container matColumnDef="GeneratedOn">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header> Generated On </mat-header-cell>
+                                  <mat-cell *matCellDef="let row" data-label="GeneratedOn"> {{row.GeneratedOn}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="SuppliedOn">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Supplied On </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" data-label="SuppliedOn"> {{row.SuppliedOn}} </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="OrderPaymentTypeName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Order Payment Type </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" data-label="OrderPaymentTypeName"> {{row.OrderPaymentTypeName}} </mat-cell>
+                                </ng-container>
+                                  
+                            
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                </mat-row>
+                              </mat-table>
+                            
+                      
+                            </div>
+                            <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
+                      
+                        </div>
+                        </div>
+                        </div>
+                      
+                      </div>
+                 </mat-tab>
+            </mat-tab-group>
+        </div>
+      </div>
+
+  </div>
+<!-- Dealer Details Ends  -->    
+
+
+</div>
+
+<div style="margin:0 auto;" class="container-fluid" *ngIf= "!loader && showSms">
+
+  <div class="row">
+     <div class="col-3"></div>
+     <div class="col-6">
+      <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #c4bff8 !important;">
+        <div class="row">
+
+          <div class="col-12" style="text-align: center;">
+            <h1 style="margin-top: 0px;">SEND SMS</h1>
+          </div>
+
+           <div class="col-12">
+            <h3 style="margin-top: 0px;">Dealership Name</h3>
+            <mat-form-field class="example-full-width" style="width: 100%;">                                     
+                <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DealershipName">
+            </mat-form-field>
+           </div>
+
+           <div class="col-12">
+            <h3 style="margin-top: 0px;">Contact Number</h3>
+            <mat-form-field class="example-full-width" style="width: 100%;">                                     
+                <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [(ngModel)]="number">
+            </mat-form-field>
+           </div>
+
+           <div class="col-12">
+            <h3 style="margin-top: 0px;">Type Message</h3>            
+            <mat-form-field appearance="outline" style="width: 100%;">                    
+              <textarea matInput style="font-size: 30px;height: 150px;font-weight: 300;color: #373e43;text-align: center;" [(ngModel)]="message"></textarea>
+            </mat-form-field>
+           </div>
+
+           <div class="col-12"  style="text-align: center;">
+              <button mat-stroked-button color="primary" style="width: 150px;" (click)="sendSMS()">Send SMS</button>
+           </div>
+
+        </div>
+      </mat-card>
+     </div>
+     <div class="col-3"></div>
+  </div>
+
+</div>
+
+<div class="fab-container">
+  <button mat-fab class="fab-toggler"
+          (click)="onToggleFab()">
+    <i class="material-icons">add</i>
+  </button>
+  <div>
+    <button *ngFor="let btn of buttons"
+            mat-mini-fab
+            class="fab-secondary"
+            color="secondary">
+      <i class="material-icons" (click)="fabButtonClicked(btn.icon)">{{btn.icon}}</i>
+    </button>
+  </div>
+</div>

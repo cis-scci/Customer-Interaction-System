@@ -1,0 +1,195 @@
+<div class="wrapper" *ngIf="loader">   
+    <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+</div>
+
+<div class="container-fluid" *ngIf="!loader">
+    <div class="table-container">
+        <h2 style="text-align: center;">{{dealerName}}</h2>
+      <div class="card card-bordered fullheight-min">      
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-5">
+                   <h3 style="text-align: center;">Select Product</h3>
+                   <mat-card style="background: #f5f3f4;">
+                    <mat-tab-group (selectedTabChange)="changeCategory($event)">
+                        <mat-tab label="All"> 
+                        </mat-tab>
+                        <mat-tab *ngFor="let category of categories" [label]="category.ProductCategoryTypeName"  #productCategory>
+                        </mat-tab>
+                    </mat-tab-group>                    
+                    <div style="height: 620px;overflow: auto;">
+                        <div class="productDetailWrapper" *ngIf="productDetailLoader">   
+                            <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+                        </div>
+                     <div *ngIf="!productDetailLoader && products">
+                        <mat-card *ngFor="let product of products" class="mat-elevation-z3 mt-2">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img [src]="'http://gc9.scci.co.in/V2' + product.ProductImageURL" alt="Not Found" style="width: 50px;height: 70px;">
+                                </div>
+                                <div class="col-5">
+                                    <div class="mb-4">
+                                        <span style="font-size: larger;font-weight: 500;">{{product.ProductName}}</span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <span *ngIf="product.Colour != 'Clear' && product.Colour != ''" class="dot mr-1" [style.background] = "product.Colour"></span>
+                                        <span style="font-weight: 500;" [style.color] = "product.Colour == 'Clear' ? '' : product.Colour">{{product.ProductSize + " "}} {{product.Colour == 'Clear' ? '' : product.Colour}}</span>
+                                    </div>                                
+                                </div>
+                                <div class="col-4">
+                                    <div class="mb-2" style="text-align: right;">
+                                        <mat-icon style="cursor:pointer" (click)="addToCart(product,productQuantity.value)">add_circle</mat-icon>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <input type="text" style="width: 33px;text-align: center;" #productQuantity [value]="product.quantity" class="mb-2">
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <img src="assets/images/currency-inr.png" alt="no image">                                    
+                                        <span class="mr-4" style="font-size: large;">{{product.DealerPrice}}</span>
+                                        <mat-icon  style="cursor:pointer" (click)="removeFromCart(product,productQuantity.value)">remove_circle</mat-icon>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </mat-card>
+                     </div>
+                   </div>
+                   </mat-card>                    
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-5">
+                    <h3 style="text-align: center;">Cart</h3>                    
+                        <mat-card *ngIf="calculateNetPayableDetails.length > 0" style="height: 700px;background: #f5f3f4;">
+                            <div style="height: 500px;overflow: auto;">
+                            <mat-card *ngFor="let product of selectedCalculateNetPayableDetails.Value.OrderItems" class="mat-elevation-z3 mt-2">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img [src]="'http://gc9.scci.co.in/V2' + product.ProductImageURL" alt="Not Found" style="width: 50px;height: 70px;">
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-4">
+                                            <span style="font-size: larger;font-weight: 500;">{{product.ProductName}}</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <span *ngIf="product.Colour != 'Clear' && product.Colour != ''" class="dot mr-1" [style.background] = "product.Colour"></span>
+                                            <span style="font-weight: 500;" [style.color] = "product.Colour == 'Clear' ? '' : product.Colour">{{product.ProductSize + " "}} {{product.Colour == 'Clear' ? '' : product.Colour}}</span>
+                                        </div>                                
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="mb-2 mr-5" style="text-align: right;">
+                                            <mat-icon style="cursor:pointer" (click)="addToCart(product,productQuantityExist.value)">add_circle</mat-icon>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            <input type="text" style="width: 33px;text-align: center;" disabled #productQuantityExist [value]="product.Quantity" class="mb-2 mr-4">
+                                            <mat-icon class="mb-2" style="cursor:pointer" (click)="removeProductFromCart(product)">delete_forever</mat-icon>
+                                        </div>
+                                        <div style="text-align: right;" class="mr-5">
+                                            <img src="assets/images/currency-inr.png" alt="no image">                                    
+                                            <span class="mr-4" style="font-size: large;">{{product.TotalAmount}}</span>
+                                            <mat-icon  style="cursor:pointer" (click)="removeFromCart(product,productQuantityExist.value)">remove_circle</mat-icon>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </mat-card>                  
+                           </div>
+                           <br>
+
+                         <div class="row">
+                            <div class="col-12 mt-4">
+                                <mat-card  class="mt-1" style="height: 100%;">
+                                    <span style="float:left;font-size: large;font-weight: 500;">Subtotal</span>
+                                    <span style="float:right">
+                                    <img  src="assets/images/currency-inr.png" alt="no image">                                    
+                                    <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].OrderValueOnListPrice}}</span>                               
+                                    </span>
+                                </mat-card>
+                            </div>
+                         </div>  
+
+                           
+                         <div class="row">
+                            <div class="col-12 mt-2">         
+                           <mat-card style="text-align: center;height: 100%;" class="mb-2">                               
+                            <span style="float:left;font-size: large;font-weight: 500;">Payment Option</span>
+                           <mat-form-field  style="width: 300px;float: right;">                     
+                            <mat-label>SELECT PAYMENT OPTION</mat-label>
+                            <mat-select [(ngModel)]="paymentType" (selectionChange)="paymentTypeChange($event)">
+                              <mat-option *ngFor="let paymentType of calculateNetPayableDetails" [value]="paymentType.OrderPaymentTypeID">
+                                {{paymentType.OrderPaymentTypeName}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>                           
+                          </mat-card>
+                        </div>
+                    </div>  
+
+                        </mat-card>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="calculateNetPayableDetails.length > 0">
+                <div class="col-5">
+                  <mat-card class="mt-3">
+
+                    <div class="row">
+
+                        <div class="col-12">
+                        <span style="float:left;font-size: large;font-weight: 500;">Subtotal</span>
+                        <span style="float:right">
+                        <img  src="assets/images/currency-inr.png" alt="no image">                                    
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].OrderValueOnListPrice}}</span>                               
+                        </span>
+                    </div><br>
+                    <div class="col-12" *ngFor="let discount of selectedCalculateNetPayableDetails.Value.DiscountApplicableOnPrice">
+                        <span style="float:left;font-size: large;font-weight: 500;">{{discount.DiscountTitle}} {{discount.DiscountPrecentage != null ? '(' + discount.DiscountPrecentage + ')' : ''}}</span>                                                                            
+                        <span style="float:right">
+                            <img *ngIf="discount.DiscountAmount" src="assets/images/currency-inr.png" alt="no image">     
+                        <span style="font-size: large;">{{discount.DiscountAmount ? discount.DiscountAmount : 'NA'}}</span>
+                        </span>
+                        <br>
+                    </div><br>
+                    <div class="col-12">
+                        <span style="float:left;font-size: large;font-weight: 500;">Total Amount</span>             
+                        <span style="float:right">
+                            <img  src="assets/images/currency-inr.png" alt="no image">                
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].TotalAmount}}</span>
+                        </span>
+                    </div><br>
+                    <div class="col-12">
+                        <span style="float:left;font-size: large;font-weight: 500;">GST</span>
+                        <span style="float:right">
+                            <img  src="assets/images/currency-inr.png" alt="no image">     
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.NetPayable[0].GSTAmount  | number : '1.2-2'}}</span>
+                        </span>
+                    </div><br>
+                    <div class="col-12">
+                        <span style="float:left;font-size: large;font-weight: 500;">Payable Amount</span>
+                        <span style="float:right">
+                            <img  src="assets/images/currency-inr.png" alt="no image">     
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.NetPayable[0].NetPayable}}</span>
+                        </span>
+                    </div>
+
+                   </div>
+                  </mat-card>
+                </div>
+
+                <div class="col-2">
+                </div>
+
+                <div class="col-5" style="text-align: center;">
+                    <button mat-raised-button color="primary" class="mt-5" style="width: 200px;height: 70px;" (click)="sendForApproval()">Send for Approval</button><br>
+                    <button mat-raised-button color="primary" class="mt-4" style="width: 200px;height: 70px;">Cancel</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+      </div>
+    </div>  
+</div>

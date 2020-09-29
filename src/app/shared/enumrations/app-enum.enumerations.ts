@@ -10,7 +10,18 @@ export enum FuncStatus {
   Error = 3,
 }
 
-export enum Sales {
-  getDealerList = "getDealerList"
+export enum Login {
+  userLogin = "userLogin"
+}
+
+export enum Dealer {
+  getDealerList = "getDealerList",
+  getDealerDetail = "getDealerDetail",
+  getOrderDetail = "getOrderDetail",
+  sendSMS = "sendSMS",
+  getProductCategory = "getProductCategory",
+  getProducts = "getProducts",
+  getCalculateNetPayableDetails = "getCalculateNetPayableDetails",
+  SaveDealerOrderForPlatinumUsers = "SaveDealerOrderForPlatinumUsers"
 }
 

@@ -24,7 +24,11 @@ b{
   }
 
 .heading-block{
-  padding-top: 15px;
+  padding-top: 20px;
+  color: white;
+  text-align: left;
+  display:unset;  
+  text-transform: unset;
 }
 
 @media(max-width: 600px) {
