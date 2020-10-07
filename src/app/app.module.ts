@@ -62,14 +62,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { ToastrModule } from 'ngx-toastr';
-// Import FusionCharts library and chart modules
-import * as FusionCharts from "fusioncharts";
-import * as charts from "fusioncharts/fusioncharts.charts";
-import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-// Import angular2-fusioncharts
-import { FusionChartsModule } from 'angular-fusioncharts';
-// Pass the fusioncharts library and chart modules
-FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 @NgModule({
   declarations: [
@@ -125,8 +117,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-    ToastrModule.forRoot(), 
-    FusionChartsModule
+    ToastrModule.forRoot()
   ],
   providers: [
     {

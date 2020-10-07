@@ -6,6 +6,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { HandelError , Dealer } from '../../shared/enumrations/app-enum.enumerations';
 import { GlobalRestService } from '../../services/rest/global-rest.service';
+import * as uuid from 'uuid';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dealers',
@@ -16,17 +18,17 @@ export class DealersComponent implements OnInit {
 
   loader: boolean = false;
 
-  displayedColumns: string[] = ['DealershipName', 'DistributorName','DistrictName','StateName','phone','Action'];
+  displayedColumns: string[] = ['DealershipName', 'DistributorName','DistrictName','StateName','phone','Action','Call'];
   dataSource:any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private restService: GlobalRestService,private primaryHeader: PrimaryHeaderService,private router: Router) {}
+  constructor(private toastr: ToastrService,private restService: GlobalRestService,private primaryHeader: PrimaryHeaderService,private router: Router) {}
 
   ngOnInit() {
     //setting page title
-    this.primaryHeader.pageTitle.next("Dealers Detail");
+    this.primaryHeader.pageTitle.next("Dealers List");
     this.getDealerList();
   }
 
@@ -65,15 +67,49 @@ export class DealersComponent implements OnInit {
       );
   }
 
-  addCard(dealershipName,id,phone){
+  addCard(dealershipName,id,phone,deviceId){
        //setting Dealer Name
        this.primaryHeader.dealerName.next(dealershipName);
-       let navigateUrl = "/dealers/" + id + "/" + phone + "/approval";
+       let navigateUrl = "/dealers/" + id + "/" + phone + "/" + deviceId + "/approval";
+       
        this.router.navigate([navigateUrl]);
   }
 
   navigateToDetail(id){
     this.router.navigate(["/dealers/" + id  + "/detail"]);
+  }
+
+  callInitiate(){
+
+    this.loader = true;
+    // call api code here...
+    
+    let reqParams = {
+      "user_id":"5f7586e80ec11130",
+      "number":"+918860332223",
+      "reference_id": uuid.v4()
+     }
+
+    this.restService.ApiEndPointUrlOrKey = Dealer.initiateCall;
+    this.restService.HttpPostParams = reqParams;
+    this.restService.AlertAndErrorAction = HandelError.ShowAndReturn;          
+    this.restService.callApi()
+      .subscribe(
+      (sucessResponse => {     
+        this.loader = false;
+        //console.log(sucessResponse)
+        if(sucessResponse.rs == 0){
+          this.toastr.success("Call initiated successfully!!");
+        }
+        else if(sucessResponse.rs == 1){
+          this.toastr.error("Some problem occured in initiating the call. Kindly try again later!!");
+        }
+      }),
+      (err => {
+        this.toastr.error("Some problem occured in initiating the call. Kindly try again later!!");
+        this.loader = false;
+      })
+      );    
   }
 
 }

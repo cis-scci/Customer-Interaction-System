@@ -22,7 +22,7 @@ const routes: Routes = [
         component: DealerDetailComponent
       },
       {
-        path:':id/:phone/approval',
+        path:':id/:phone/:deviceId/approval',
         component: ApprovalComponent
       }
       

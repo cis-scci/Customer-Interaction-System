@@ -1,0 +1,142 @@
+.icon{
+    left: 5.33%;
+    position: absolute;
+    color: #00587C;
+    font-weight: normal;
+    font-size: 15px;
+  }
+  .heading{
+    position: absolute;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    /* identical to box height */
+
+    text-transform: capitalize;
+
+    color: #00587C;
+    margin-top: 1px;
+    margin-bottom: 0px;
+
+  }
+  .written{
+    font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 13px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #00587C;
+margin:0;
+
+  }
+  .bell{
+   width: 21.74px;
+    height: 22px;
+    left: 9px;
+    position: relative;
+    top: 7px;
+  }
+  
+      .play{
+    width: 50px;
+    height: 50px;
+    position: relative;
+  margin-left: 45%;
+  /* margin-right: 50%; */
+  top: 100px;
+  z-index: 999!important;
+  }
+  .img{
+    width: 100%;
+  }
+  .date{
+    font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height */
+
+
+color: #747AA0;
+  }
+  section{
+    height: 28%;
+  }
+
+  .desc{
+    
+font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 180%;
+/* or 23px */
+
+
+color: #555964;
+
+  }
+
+  .wrapper {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    height: calc(100vh - 20px);    
+  }
+
+  .question{
+    width: 90%;
+    background: #00587C;
+    border-radius: 500px;
+    //position: absolute;
+    //bottom: 30px;
+  }
+
+  .question-text{
+    font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 21px;
+text-transform: none;
+/* identical to box height */
+
+text-align: center;
+color: #FFFFFF;
+  }
+
+  hr {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}  
+
+.input-text{
+    font-family: Poppins;
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 21px;
+/* identical to box height */
+
+
+color: #555964;
+}
+
+
+.addPoints{    
+  background: gainsboro;  
+  font-family: Poppins;
+  font-style: normal;  
+  font-size: 10px;  
+  /* identical to box height */
+  text-align: center;
+  color: white;
+  }

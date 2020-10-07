@@ -12,8 +12,31 @@ main{
     }
 }
 
+mat-header-cell{
+    font-size: larger;
+}
+
 @media(max-width: 600px) {
  .main{
     margin: 100px 15px;
  }
+}
+
+.wrapper {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    height: calc(100vh - 20px);    
+}
+
+.mat-column-Sno {
+    flex: 0 0 100px;
+}
+
+.mat-column-OrderID {
+    flex: 0 0 200px;
+}
+
+.mat-column-DealershipName {
+    flex: 0 0 250px;
 }

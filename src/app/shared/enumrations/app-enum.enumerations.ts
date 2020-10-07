@@ -19,9 +19,19 @@ export enum Dealer {
   getDealerDetail = "getDealerDetail",
   getOrderDetail = "getOrderDetail",
   sendSMS = "sendSMS",
+  registerNewDealer = "registerNewDealer",
+  getPinCodeDetail = "getPinCodeDetail",
+  updateDealerVisitingCard = "updateDealerVisitingCard",
+  updateDealerAddress = "updateDealerAddress",
   getProductCategory = "getProductCategory",
   getProducts = "getProducts",
   getCalculateNetPayableDetails = "getCalculateNetPayableDetails",
-  SaveDealerOrderForPlatinumUsers = "SaveDealerOrderForPlatinumUsers"
+  SaveDealerOrderForPlatinumUsers = "SaveDealerOrderForPlatinumUsers",
+  approveOrder = "approveOrder",
+  initiateCall = "initiateCall"  
+}
+
+export enum Dashboard {
+   getDashboardDetails = "getDashboardDetails"
 }
 

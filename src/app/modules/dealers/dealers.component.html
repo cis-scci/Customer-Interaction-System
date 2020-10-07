@@ -49,10 +49,18 @@
 
           <ng-container matColumnDef="Action">
             <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-            <mat-cell *matCellDef="let row" data-label="Action"> <a (click)="addCard(row.DealershipName,row.DealerID,row.phone)" style="cursor: pointer;color: #337ab7;">Create cart</a></mat-cell>
+            <mat-cell *matCellDef="let row" data-label="Action"> <a (click)="addCard(row.DealershipName,row.DealerID,row.phone,row.DeviceID)" style="cursor: pointer;color: #337ab7;">Create cart</a></mat-cell>
           </ng-container>
 
-          dealerName
+          <ng-container matColumnDef="Call">
+            <mat-header-cell *matHeaderCellDef> Call </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="Call"> 
+              
+              <i style="cursor: pointer;"  class="material-icons">phone</i>
+              
+            </mat-cell>
+          </ng-container>
+          
       
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;">

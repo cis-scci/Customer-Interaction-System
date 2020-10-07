@@ -15,9 +15,25 @@
       "sub_modules": [
         {
           "id": 1,
+          "name": "Dashboard",
+          "desc": "",
+          "route": "/dashboard",
+          "icon": "",
+          "css": ""
+        },
+        {
+          "id": 2,
           "name": "Dealers",
           "desc": "",
           "route": "/dealers",
+          "icon": "",
+          "css": ""
+        },
+        {
+          "id": 3,
+          "name": "Add Dealer",
+          "desc": "",
+          "route": "/dealers/signup",
           "icon": "",
           "css": ""
         } 
@@ -54,6 +70,26 @@
         "method": "GET",
         "url": "http://msg.wemonde.com/api/sendSMS?token=9beb04432690e175319db4fbc75e406f&senderid=GCCLUB&route=1&unicode=1&number=#number&message=#message"
       },
+      "registerNewDealer": {
+        "desc": "Register New Dealer",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/CISOrderingAPI/api/Auth/RegisterNewDealer"
+      },
+      "getPinCodeDetail": {
+        "desc": "Get Pin Code Detail",
+        "method": "GET",
+        "url": "http://dev.scci.co.in:88/V1/CISOrderingAPI/api/Report/GetPincodeDetail?PinCode=#pincode"
+      },
+      "updateDealerVisitingCard": {
+        "desc": "Update Dealer Visiting Card",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/CISOrderingAPI/api/Auth/UpdateDealersCard?DealerID=#dealerId"
+      },
+      "updateDealerAddress": {
+        "desc": "Update Dealer Address",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/CISOrderingAPI/api/Auth/UpdateAppDealerAddressForPlatinumUser"
+      },
       "getProductCategory": {
         "desc": "Get Available Product Categories",
         "method": "POST",
@@ -62,17 +98,39 @@
       "getProducts": {
         "desc": "Get Available Products",
         "method": "POST",
-        "url": "http://dev.scci.co.in:88/V1/PlatinumOrdering/api/Order/GetAvailableProductsForPlatinumUsers"
+        "url": "http://dev.scci.co.in:88/V1/CISOrderingAPI/api/Order/GetAvailableProductsForPlatinumUsers"
       },
       "getCalculateNetPayableDetails": {
         "desc": "Get Calculate NetPayable",
         "method": "POST",
-        "url": "http://dev.scci.co.in:88/V1/PlatinumOrdering/api/Order/CalculateNetPayableForAllPaymentModePlatinumUsers_V_EMI"
+        "url": "http://dev.scci.co.in:88/V1/CISOrderingAPI/api/Order/CalculateNetPayableForAllPaymentModePlatinumUsers"
       },
       "SaveDealerOrderForPlatinumUsers": {
         "desc": "Send order for approval",
         "method": "POST",
-        "url": "http://dev.scci.co.in:88/V1/PlatinumOrdering/api/Order/SaveDealerOrderForPlatinumUsers"
+        "url": "http://dev.scci.co.in:88/V1/CISOrderingAPI/api/Order/SaveDealerOrderForPlatinumUsers"
+      },
+      "approveOrder": {
+        "desc": "Send order for approval",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/WebOrderFlagedQntyBelow2?OrderID=#OrderID"
+      },
+      "initiateCall": {
+        "desc": "Initiate Call",
+        "method": "POST",
+        "url": "https://gc9.scci.co.in/GameZone/api/Game/InitiateCall"
+      },
+      "getDashboardDetails": {
+        "desc": "Get Dashboard Details",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/CISDashbaord"
+      }
+    },    
+    "_dashboard": {
+      "getDashboardDetails": {
+        "desc": "Get Dashboard Details",
+        "method": "POST",
+        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/CISDashbaord"
       }
     } 
   }

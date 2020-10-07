@@ -4,29 +4,30 @@
 
 <div class="container-fluid" *ngIf="!loader">
     <div class="table-container">
-        <h2 style="text-align: center;">{{dealerName}}</h2>
+        <h2 style="text-align: center;">{{dealerName}}</h2>        
+        <button mat-stroked-button color="primary" class="mb-1" style="float: right;width: 200px;" (click)="backToList()">Go to dealer list</button>
       <div class="card card-bordered fullheight-min">      
         <div class="card-body">
 
             <div class="row">
                 <div class="col-5">
                    <h3 style="text-align: center;">Select Product</h3>
-                   <mat-card style="background: #f5f3f4;">
-                    <mat-tab-group (selectedTabChange)="changeCategory($event)">
-                        <mat-tab label="All"> 
-                        </mat-tab>
-                        <mat-tab *ngFor="let category of categories" [label]="category.ProductCategoryTypeName"  #productCategory>
-                        </mat-tab>
-                    </mat-tab-group>                    
-                    <div style="height: 620px;overflow: auto;">
+                   <mat-card >      
+                    <form class="example-form" *ngIf="!productDetailLoader && products">
+                        <mat-form-field class="example-full-width" style="width: 60%;">
+                          <input type="text" [(ngModel)]="query" name="query" autocomplete="false" matInput placeholder="Search for Coolants,Brake fluids and more...">
+                          <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>          
+                      </form>              
+                    <div style="height: 600px;overflow: auto;">
                         <div class="productDetailWrapper" *ngIf="productDetailLoader">   
                             <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
                         </div>
                      <div *ngIf="!productDetailLoader && products">
-                        <mat-card *ngFor="let product of products" class="mat-elevation-z3 mt-2">
+                        <mat-card *ngFor="let product of products | SearchPipe: query" class="mat-elevation-z3 mt-2" style="padding-bottom: 10px;">
                             <div class="row">
-                                <div class="col-3">
-                                    <img [src]="'http://gc9.scci.co.in/V2' + product.ProductImageURL" alt="Not Found" style="width: 50px;height: 70px;">
+                                <div class="col-2">
+                                    <img [src]="'http://gc9.scci.co.in/V2' + product.ProductImageURL" alt="" onerror="this.src='assets/images/images.jfif';" style="width: 50px;height: 70px;">                        
                                 </div>
                                 <div class="col-5">
                                     <div class="mb-4">
@@ -34,83 +35,107 @@
                                     </div>
                                     <div class="mb-2">
                                         <span *ngIf="product.Colour != 'Clear' && product.Colour != ''" class="dot mr-1" [style.background] = "product.Colour"></span>
-                                        <span style="font-weight: 500;" [style.color] = "product.Colour == 'Clear' ? '' : product.Colour">{{product.ProductSize + " "}} {{product.Colour == 'Clear' ? '' : product.Colour}}</span>
+                                        <span style="font-weight: 500;" [style.color] = "product.Colour == 'Clear' ? '' : product.Colour">{{product.ProductSize + " "}} {{product.Colour == 'Clear' ? '' : product.Colour}}</span><span>, {{product.NoOfUnits}} x {{product.ProductSize}}</span>
                                     </div>                                
                                 </div>
-                                <div class="col-4">
-                                    <div class="mb-2" style="text-align: right;">
+
+                                <div  class="col-3 mt-4">
+                                    <div>                                        
+                                        <img *ngIf="product.ListPrice != product.DealerPrice" src="assets/images/currency-inr.png" alt="no image" width="15" height="15">
+                                        <span *ngIf="product.ListPrice != product.DealerPrice" style="text-decoration: line-through;">{{product.ListPrice | number : '1.2-2'}}</span><br>
+                                        <img src="assets/images/currency-inr.png" alt="no image">
+                                        <span style="font-size: large;">{{product.DealerPrice | number : '1.2-2'}}</span>                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div style="text-align: right;">
                                         <mat-icon style="cursor:pointer" (click)="addToCart(product,productQuantity.value)">add_circle</mat-icon>
                                     </div>
-                                    <div style="text-align: right;">
-                                        <input type="text" style="width: 33px;text-align: center;" #productQuantity [value]="product.quantity" class="mb-2">
+                                    <div style="text-align: right;" class="mb-1">
+                                        <input type="text" style="height: 20px; width: 33px;text-align: center;" #productQuantity [value]="product.quantity">
                                     </div>
                                     <div style="text-align: right;">
-                                        <img src="assets/images/currency-inr.png" alt="no image">                                    
-                                        <span class="mr-4" style="font-size: large;">{{product.DealerPrice}}</span>
-                                        <mat-icon  style="cursor:pointer" (click)="removeFromCart(product,productQuantity.value)">remove_circle</mat-icon>
-                                    </div>
-                                    
+                                    <mat-icon  style="cursor:pointer" (click)="removeFromCart(product,productQuantity.value)">remove_circle</mat-icon>
+                                    </div>                                    
                                 </div>
                             </div>
                         </mat-card>
                      </div>
                    </div>
-                   </mat-card>                    
+                   </mat-card>
                 </div>
                 <div class="col-2">
 
                 </div>
                 <div class="col-5">
                     <h3 style="text-align: center;">Cart</h3>                    
-                        <mat-card *ngIf="calculateNetPayableDetails.length > 0" style="height: 700px;background: #f5f3f4;">
+                        <mat-card *ngIf="calculateNetPayableDetails.length > 0" style="height: 730px;">
                             <div style="height: 500px;overflow: auto;">
-                            <mat-card *ngFor="let product of selectedCalculateNetPayableDetails.Value.OrderItems" class="mat-elevation-z3 mt-2">
+                                <div class="productDetailWrapper" *ngIf="this.cartProductDetailLoader">   
+                                    <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+                                </div>   
+                            <div *ngIf="!this.cartProductDetailLoader">
+                            <mat-card *ngFor="let product of selectedCalculateNetPayableDetails.Value.OrderItems" class="mat-elevation-z3 mt-2" style="margin-bottom: 10px;">
                                 <div class="row">
-                                    <div class="col-3">
-                                        <img [src]="'http://gc9.scci.co.in/V2' + product.ProductImageURL" alt="Not Found" style="width: 50px;height: 70px;">
+                                    <div class="col-2">
+                                        <img [src]="'https://gc9.scci.co.in/V2' + product.ProductImageURL" alt="" onerror="this.src='assets/images/images.jfif';" style="width: 50px;height: 70px;">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-5">
                                         <div class="mb-4">
                                             <span style="font-size: larger;font-weight: 500;">{{product.ProductName}}</span>
                                         </div>
                                         <div class="mb-2">
                                             <span *ngIf="product.Colour != 'Clear' && product.Colour != ''" class="dot mr-1" [style.background] = "product.Colour"></span>
-                                            <span style="font-weight: 500;" [style.color] = "product.Colour == 'Clear' ? '' : product.Colour">{{product.ProductSize + " "}} {{product.Colour == 'Clear' ? '' : product.Colour}}</span>
+                                            <span style="font-weight: 500;" [style.color] = "product.Colour == 'Clear' ? '' : product.Colour">{{product.ProductSize + " "}} {{product.Colour == 'Clear' ? '' : product.Colour}}</span><span>, {{product.NoOfUnits}} x {{product.ProductSize}}</span>
                                         </div>                                
                                     </div>
-                                    <div class="col-5">
-                                        <div class="mb-2 mr-5" style="text-align: right;">
-                                            <mat-icon style="cursor:pointer" (click)="addToCart(product,productQuantityExist.value)">add_circle</mat-icon>
+
+                                    <div  class="col-3 mt-4">
+                                        <div>                                        
+                                            <img src="assets/images/currency-inr.png" alt="no image">
+                                            <span class="mr-4" style="font-size: large;">{{product.TotalAmount | number : '1.2-2'}}</span><br>
+                                            <span *ngIf="product.ListPrice != product.DealerPrice" style="color: red;">You Saved <img src="assets/images/currency-inr.png" alt="no image" width="14" height="15"> {{product.ListPrice * product.Quantity - product.TotalAmount  | number : '1.2-2'}}</span>
                                         </div>
-                                        <div style="text-align: right;">
-                                            <input type="text" style="width: 33px;text-align: center;" disabled #productQuantityExist [value]="product.Quantity" class="mb-2 mr-4">
-                                            <mat-icon class="mb-2" style="cursor:pointer" (click)="removeProductFromCart(product)">delete_forever</mat-icon>
-                                        </div>
-                                        <div style="text-align: right;" class="mr-5">
-                                            <img src="assets/images/currency-inr.png" alt="no image">                                    
-                                            <span class="mr-4" style="font-size: large;">{{product.TotalAmount}}</span>
-                                            <mat-icon  style="cursor:pointer" (click)="removeFromCart(product,productQuantityExist.value)">remove_circle</mat-icon>
-                                        </div>                                        
                                     </div>
+    
+                                    <div class="col-2">
+                                        <div style="text-align: right;">
+                                            <mat-icon style="cursor:pointer;margin-right: 30px;" (click)="addToCart(product,productQuantityExist.value)">add_circle</mat-icon>
+                                        </div>
+                                        <div style="text-align: right;" class="mb-1">
+                                            <input type="text" style="height: 20px;width: 33px;text-align: center;" disabled #productQuantityExist [value]="product.Quantity">                                            
+                                            <mat-icon class="mb-2" style="cursor:pointer" (click)="removeProductFromCart(product)">delete_forever</mat-icon>
+                                        </div>                                       
+                                        <div style="text-align: right;">
+                                            <mat-icon  style="cursor:pointer;margin-right: 30px;" (click)="removeFromCart(product,productQuantityExist.value)">remove_circle</mat-icon>
+                                        </div> 
+                                    </div>
+
+                                    
+
+
+
                                 </div>
                             </mat-card>                  
                            </div>
+                           </div>
                            <br>
 
-                         <div class="row">
+                         <div class="row" *ngIf="!this.cartProductDetailLoader">
                             <div class="col-12 mt-4">
                                 <mat-card  class="mt-1" style="height: 100%;">
                                     <span style="float:left;font-size: large;font-weight: 500;">Subtotal</span>
                                     <span style="float:right">
                                     <img  src="assets/images/currency-inr.png" alt="no image">                                    
-                                    <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].OrderValueOnListPrice}}</span>                               
+                                    <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].TotalAmount   | number : '1.2-2'}}</span>                               
                                     </span>
                                 </mat-card>
                             </div>
                          </div>  
 
                            
-                         <div class="row">
+                         <div class="row" *ngIf="!this.cartProductDetailLoader">
                             <div class="col-12 mt-2">         
                            <mat-card style="text-align: center;height: 100%;" class="mb-2">                               
                             <span style="float:left;font-size: large;font-weight: 500;">Payment Option</span>
@@ -127,49 +152,70 @@
                     </div>  
 
                         </mat-card>
+                        <mat-card style="height: 680px;text-align: center;font-size: large;" *ngIf="calculateNetPayableDetails.length == 0">
+                            <div class="productDetailWrapper" *ngIf="this.cartProductDetailLoader">   
+                                <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+                            </div>   
+                         <span *ngIf="!this.cartProductDetailLoader">Cart is empty. Add products to the cart.</span>
+                        </mat-card>
                 </div>
             </div>
 
-            <div class="row" *ngIf="calculateNetPayableDetails.length > 0">
+            <div class="row" *ngIf="!this.cartProductDetailLoader && calculateNetPayableDetails.length > 0">
                 <div class="col-5">
                   <mat-card class="mt-3">
 
                     <div class="row">
 
                         <div class="col-12">
-                        <span style="float:left;font-size: large;font-weight: 500;">Subtotal</span>
+                        <span style="float:left;font-size: large;font-weight: 500;">Effective Amount</span>
                         <span style="float:right">
                         <img  src="assets/images/currency-inr.png" alt="no image">                                    
-                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].OrderValueOnListPrice}}</span>                               
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].TotalAmount   | number : '1.2-2'}}</span>                               
                         </span>
-                    </div><br>
-                    <div class="col-12" *ngFor="let discount of selectedCalculateNetPayableDetails.Value.DiscountApplicableOnPrice">
-                        <span style="float:left;font-size: large;font-weight: 500;">{{discount.DiscountTitle}} {{discount.DiscountPrecentage != null ? '(' + discount.DiscountPrecentage + ')' : ''}}</span>                                                                            
+                    </div>
+                    <div class="col-12" *ngIf="selectedCalculateNetPayableDetails.Value.ContractPoints[0].ContractPoints > 0">
+                        <span style="float:left;font-size: large;font-weight: 500;">Happy Samurai discount</span>
                         <span style="float:right">
-                            <img *ngIf="discount.DiscountAmount" src="assets/images/currency-inr.png" alt="no image">     
-                        <span style="font-size: large;">{{discount.DiscountAmount ? discount.DiscountAmount : 'NA'}}</span>
+                            <img src="assets/images/currency-inr.png" alt="no image">     
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.ContractPoints[0].ContractPoints   | number : '1.2-2'}}</span>
                         </span>
                         <br>
-                    </div><br>
-                    <div class="col-12">
+                    </div>
+                    <div class="col-12" *ngIf="selectedCalculateNetPayableDetails.Value.PrePaymentDiscount[0].PrePaymentDiscount > 0">
+                        <span style="float:left;font-size: large;font-weight: 500;">Advance Payment discount {{selectedCalculateNetPayableDetails.Value.PrePaymentDiscount[0].PrePaymentDiscountApplicable | number : '1.2-2'}} %</span>
+                        <span style="float:right">
+                            <img src="assets/images/currency-inr.png" alt="no image">
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.PrePaymentDiscount[0].PrePaymentDiscount   | number : '1.2-2'}}</span>
+                        </span>
+                        <br>
+                    </div>
+                    <!-- <div class="col-12">
                         <span style="float:left;font-size: large;font-weight: 500;">Total Amount</span>             
                         <span style="float:right">
                             <img  src="assets/images/currency-inr.png" alt="no image">                
                         <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.OrderValue[0].TotalAmount}}</span>
                         </span>
-                    </div><br>
+                    </div><br> -->
                     <div class="col-12">
-                        <span style="float:left;font-size: large;font-weight: 500;">GST</span>
+                        <span style="float:left;font-size: large;font-weight: 500;">GST {{selectedCalculateNetPayableDetails.Value.NetPayable[0].GSTApplicable | number : '1.2-2'}} %</span>
                         <span style="float:right">
                             <img  src="assets/images/currency-inr.png" alt="no image">     
                         <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.NetPayable[0].GSTAmount  | number : '1.2-2'}}</span>
                         </span>
-                    </div><br>
+                    </div>
+                    <div class="col-12">
+                        <span style="float:left;font-size: large;font-weight: 500;">Total</span>
+                        <span style="float:right">
+                            <img  src="assets/images/currency-inr.png" alt="no image">     
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.NetPayable[0].AmountAfterGST   | number : '1.2-2'}}</span>
+                        </span>
+                    </div>
                     <div class="col-12">
                         <span style="float:left;font-size: large;font-weight: 500;">Payable Amount</span>
                         <span style="float:right">
                             <img  src="assets/images/currency-inr.png" alt="no image">     
-                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.NetPayable[0].NetPayable}}</span>
+                        <span style="font-size: large;">{{selectedCalculateNetPayableDetails.Value.NetPayable[0].AmountAfterGST   | number : '1.0-0'}}</span>
                         </span>
                     </div>
 
@@ -182,7 +228,7 @@
 
                 <div class="col-5" style="text-align: center;">
                     <button mat-raised-button color="primary" class="mt-5" style="width: 200px;height: 70px;" (click)="sendForApproval()">Send for Approval</button><br>
-                    <button mat-raised-button color="primary" class="mt-4" style="width: 200px;height: 70px;">Cancel</button>
+                    <button mat-raised-button color="primary" class="mt-4" style="width: 200px;height: 70px;" (click)="cancelOrder()">Cancel</button>
                 </div>
 
             </div>
@@ -193,3 +239,27 @@
       </div>
     </div>  
 </div>
+
+
+
+<!-- <ng-template #template>  
+    <div class="modal-header">  
+      <h4 class="modal-title pull-left">Order Status</h4>  
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">  
+        <span aria-hidden="true">×</span>  
+      </button>  
+    </div>  
+    <div class="modal-body">        
+      <div>
+          <div class="row">            
+              <div class="col-12">
+                <h2>Order has been successfully created and sent for approval with order number {{createdOrder}} !!</h2>
+              </div>            
+          </div>
+          
+      </div>      
+    </div>  
+    <div class="modal-footer">  
+      <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>  
+    </div>  
+</ng-template> -->

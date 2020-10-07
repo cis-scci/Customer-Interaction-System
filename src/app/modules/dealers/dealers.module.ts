@@ -16,11 +16,11 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { DealerDetailComponent } from './dealer-detail/dealer-detail.component';
 import { ApprovalComponent } from './approval/approval.component';
 import { MatButtonModule,MatSelectModule } from '@angular/material';
-
-
+import { SearchPipe } from '../../shared/filter-pipe/filter-pipe';
+import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 
 @NgModule({
-  declarations: [DealersComponent, DealerDetailComponent, ApprovalComponent],
+  declarations: [DealersComponent, DealerDetailComponent, ApprovalComponent,SearchPipe],
   imports: [
     CommonModule,
     DealersRoutingModule,
@@ -38,7 +38,8 @@ import { MatButtonModule,MatSelectModule } from '@angular/material';
     MatCheckboxModule,
     MatTabsModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    ModalModule.forRoot()
   ]
 })
 export class DealersModule { }

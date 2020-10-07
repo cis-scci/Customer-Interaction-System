@@ -1,14 +1,111 @@
-<div class="main">
-    <h1 >Welcome To customer-interaction-system!</h1>
+<div class="wrapper" *ngIf="loader">   
+  <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
 </div>
 
-<br>
 
-<fusioncharts
-  [width]="width"
-  [height]="height"
-  [type]="type"
-  [dataFormat]="dataFormat"
-  [dataSource]="dataSource"
->
-</fusioncharts>
+<div class="container-fluid mt-3">
+
+    <div class="row mt-4"  *ngIf= "!loader">
+      <div class="col-4">
+         <mat-card style="height: 230px;background: #f7ad94;">
+           <h3 style="text-align: center;font-weight: 500;">Orders <a style="color: black;cursor: pointer;float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>          
+
+           <h4 style="font-weight: 400;">Total Orders: {{orderSummary.Order ? orderSummary.Order : 'NA' }} </h4>
+           <h4 style="font-weight: 400;">Total Volume: {{orderSummary.Volume ? orderSummary.Volume : 'NA' }} </h4>
+           <h4 style="font-weight: 400;">Orders Value: {{orderSummary.Value ? orderSummary.Value : 'NA' }} </h4>
+         </mat-card>
+      </div>
+
+      <div class="col-4">
+        <mat-card style="height: 230px;background: #76aae6;">
+          <h3 style="text-align: center;font-weight: 500;">Onboarding <a style="color: black;cursor: pointer;float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
+          <h4 style="font-weight: 400;" *ngFor="let item of onBoarding">{{item.title}}: {{item.value ? item.value : 'NA' }} </h4>
+        </mat-card>
+      </div>
+
+     <div class="col-4">
+      <mat-card  style="height: 230px;background: #b4e481;">
+        <h3 style="text-align: center;font-weight: 500;">Payments <a style="color: black;cursor: pointer;float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
+
+        <h4 style="font-weight: 400;">Online Collection: {{payments.Online ? payments.Online : '0' }} </h4>
+        <h4 style="font-weight: 400;">Mandates: {{payments.Mandates ? payments.Mandates : '0' }} </h4>
+        <h4 style="font-weight: 400;">Mandates Failed: {{payments.MandatesFail ? payments.MandatesFail : '0' }} </h4>
+      </mat-card>
+     </div>
+
+    </div>
+
+    <div class="table-container mt-3">
+      <form class="example-form">
+        <h2 style="float:left">Order Details</h2>
+        <mat-form-field style="float: right;" class="example-full-width">
+          <input type="text" autocomplete="false" (keyup)="applyFilter($event.target.value)" matInput placeholder="Search">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>          
+      </form>
+      <div class="card card-bordered"  *ngIf= "!loader">      
+        <div class="card-body">
+        <div class="example-container mat-elevation-z8">
+  
+          <mat-table [dataSource]="dataSource" matSort>     
+
+            <ng-container matColumnDef="Sno">
+              <mat-header-cell *matHeaderCellDef > S.No </mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index" data-label="Sno"> {{i + 1}} </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="OrderID">
+              <mat-header-cell *matHeaderCellDef > Order Id </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="OrderID"> {{row.OrderID}} </mat-cell>
+            </ng-container>
+        
+  
+            <ng-container matColumnDef="DealershipName">
+              <mat-header-cell *matHeaderCellDef > Buyer </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="DealershipName"> {{row.DealershipName}}<br>({{row.DistrictName}}) </mat-cell>
+            </ng-container>
+        
+  
+            <ng-container matColumnDef="listOrderItem">
+              <mat-header-cell *matHeaderCellDef > Products </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="listOrderItem" class="mr-1">
+                <div class="row">
+                  <div class="col-12 mb-1" *ngFor="let item of row.listOrderItem">                    
+                      {{item.ProductName}} {{item.Colour}} ({{item.Quantity}})                   
+                  </div>
+                </div>
+              </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="OrderPaymentTypeName">
+              <mat-header-cell *matHeaderCellDef > Payment Mode </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="OrderPaymentTypeName"> {{row.OrderPaymentTypeName}} </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="PhoneNo">
+              <mat-header-cell *matHeaderCellDef > Discounts </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="phone"> NA </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="OrderValue">
+              <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="OrderValue">
+                <img  src="assets/images/currency-inr.png" alt="no image">
+                <b style="font-size: large;"> {{row.OrderValue}} </b>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+          </mat-table>
+        
+  
+        </div>        
+  
+    </div>
+      </div>
+      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+    </div>
+
+</div>

@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { PrimaryHeaderService } from '../layout/primary-header/primary-header.service';
+import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { HandelError , Dashboard } from '../../shared/enumrations/app-enum.enumerations';
+import { GlobalRestService } from '../../services/rest/global-rest.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-main',
@@ -8,91 +15,77 @@ import { PrimaryHeaderService } from '../layout/primary-header/primary-header.se
 })
 export class MainComponent implements OnInit {
 
-  constructor( private primaryHeader: PrimaryHeaderService) { }
+  loader: boolean = false;
+  orderSummary : any = {};
+  onBoarding : any = [];
+  payments : any = {};
+  order : any = [];
+  
+
+  displayedColumns: string[] = ['Sno','OrderID', 'DealershipName','listOrderItem','OrderPaymentTypeName','PhoneNo','OrderValue'];
+  dataSource:any;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor( private toastr: ToastrService,private restService: GlobalRestService,private primaryHeader: PrimaryHeaderService) { }
 
   ngOnInit() {
     //setting page title
     
-    this.primaryHeader.pageTitle.next("Secondary Sales Information and Management Console");
+    this.primaryHeader.pageTitle.next("Dashboard");
+    this.getDashboardDetails();
   }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
   public showMenu(event) {
     event.preventDefault();
     event.stopPropagation();
     document.querySelector('body').classList.add('az-iconbar-show');
   }
 
-  width = 600;
-  height = 400;
-  type = "spline";
-  dataFormat = "json";
-  dataSource = chartData;
+  public getDashboardDetails(){
+    this.loader = true;
+    // call api code here...
+    
+    let reqParams = {
+      "StaffID": "10116",// localStorage.getItem("currentUser"),
+      "Fromdate":"2019-08-01",
+      "Todate":"2020-09-29"
+     }
 
+    this.restService.ApiEndPointUrlOrKey = Dashboard.getDashboardDetails;
+    this.restService.HttpPostParams = reqParams;
+    this.restService.AlertAndErrorAction = HandelError.ShowAndReturn;          
+    this.restService.callApi()
+      .subscribe(
+      (sucessResponse => {     
+        this.loader = false;
+        //console.log(sucessResponse)
+        if(sucessResponse.rs == 0){
+           this.orderSummary = sucessResponse.data.orderSummary;
+           this.onBoarding = sucessResponse.data.onBoarding;
+           this.payments = sucessResponse.data.payments;
+           this.order = sucessResponse.data.order;
+           this.dataSource = new MatTableDataSource(sucessResponse.data.order);
+           this.dataSource.sort = this.sort;
+           this.dataSource.paginator = this.paginator;
+        }
+        else if(sucessResponse.rs == 1){
+          this.toastr.error("Some problem occured. Kindly try again later!!");
+        }
+      }),
+      (err => {
+        this.toastr.error("Some problem occured. Kindly try again later!!");
+        this.loader = false;
+      })
+      );    
+  }
 
-
+  
 }
-
-
-const chartData = {
-  chart: {
-    caption: "Average Monthly Temperature in Texas",
-    yaxisname: "Average Monthly Temperature",
-    anchorradius: "5",
-    plottooltext: "Average temperature in $label is <b>$dataValue</b>",
-    showhovereffect: "1",
-    showvalues: "0",
-    numbersuffix: "°C",
-    theme: "fusion",
-    anchorbgcolor: "#72D7B2",
-    palettecolors: "#72D7B2"
-  },
-  data: [
-    {
-      label: "Jan",
-      value: "1"
-    },
-    {
-      label: "Feb",
-      value: "5"
-    },
-    {
-      label: "Mar",
-      value: "10"
-    },
-    {
-      label: "Apr",
-      value: "12"
-    },
-    {
-      label: "May",
-      value: "14"
-    },
-    {
-      label: "Jun",
-      value: "16"
-    },
-    {
-      label: "Jul",
-      value: "20"
-    },
-    {
-      label: "Aug",
-      value: "22"
-    },
-    {
-      label: "Sep",
-      value: "20"
-    },
-    {
-      label: "Oct",
-      value: "16"
-    },
-    {
-      label: "Nov",
-      value: "7"
-    },
-    {
-      label: "Dec",
-      value: "2"
-    }
-  ]
-};

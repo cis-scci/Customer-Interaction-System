@@ -81,7 +81,7 @@ export class LoginPromptComponent implements OnInit {
             localStorage.setItem('currentUser', Number(sucessResponse.data.LoginData[0].StaffID).toString());
             localStorage.setItem('user_name', sucessResponse.data.LoginData[0].StaffName);
             localStorage.setItem('user_type', sucessResponse.data.LoginData[0].BaseLocation);
-            this.router.navigate(['/main']);
+            this.router.navigate(['/dashboard']);
           }
           else
           {

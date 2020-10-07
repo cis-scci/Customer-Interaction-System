@@ -163,7 +163,8 @@ export class DealerDetailComponent implements OnInit {
 
     fetch("http://msg.wemonde.com/api/sendSMS?token=9beb04432690e175319db4fbc75e406f&senderid=GCCLUB&route=1&unicode=1&number=" +  this.number + "&message=" + this.message)
      .then(res => console.log(res));
-    
+    this.toastr.success("SMS sent to the dealer successfully!!");
+    this.message = "";
     // let keyData = [
     //   {
     //     "name": "number",
@@ -189,6 +190,10 @@ export class DealerDetailComponent implements OnInit {
     //   })
     //   );
 
+  }
+
+  backToList(){
+    this.router.navigate(["/dealers"]);
   }
 
 }

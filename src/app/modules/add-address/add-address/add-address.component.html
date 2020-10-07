@@ -1,0 +1,66 @@
+<div class="wrapper" *ngIf="loader">   
+    <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+</div>
+  
+<div *ngIf="!loader">    
+    <div class="container-fluid mt-3">
+
+        <h1 style="text-align: center;">Add Address</h1>
+        <div class="row">
+
+            <div class="col-3"></div>
+            <div class="col-6">
+                <form [formGroup]="addAddressFormGroup">
+                    <div class="form-group">             
+                      <label class="ml-2">Shop Name</label>     
+                      <input type="text" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="shopName" formControlName="shopName" placeholder="Enter your shop name">
+                    </div>
+        
+                    <div class="form-group">              
+                        <label class="ml-2">Area</label>
+                        <input type="text" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="area" formControlName="area" placeholder="Enter your area">
+                    </div>
+        
+                    <div class="form-group">    
+                    <label class="ml-2">City</label>               
+                    <input type="text" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="city" formControlName="city" placeholder="Enter your city">
+                    </div>
+
+                    <div class="form-group">              
+                        <label class="ml-2">State</label>               
+                        <input type="text" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="state" formControlName="state" disabled>
+                    </div>
+        
+                    <div class="form-group">     
+                    <label class="ml-2">Pincode</label>                        
+                    <input type="number" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="pincode" formControlName="pincode" disabled>
+                    </div>
+
+                    <div class="form-group">   
+                        <label class="ml-2">Landmark(Optional)</label>                          
+                        <input type="text" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="landmark" formControlName="landmark">
+                    </div>
+
+                    <div class="form-group">   
+                        <label class="ml-2">Upload Visiting Card</label>                          
+                        <label for="files" class="btn addPoints ml-2">Choose File</label>
+                        <input id="files" style="visibility:hidden;" (change)="uploadVisitingCard($event)" type="file">
+                    </div>
+
+                </form>   
+            </div>
+            <div class="col-3"></div>
+
+            <div class="col-3"></div>
+            <div class="col-6">
+            
+                <button class="form-control btn btn-sm question" style="height: 50px;width:100%;" id="confirmBtn" type="button" (click)="addAddress()"><span class="question-text">ADD ADDRESS</span></button>
+            
+            </div>
+            <div class="col-3"></div>
+
+        </div>
+
+    </div>  
+
+</div>

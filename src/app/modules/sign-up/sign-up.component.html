@@ -1,0 +1,49 @@
+<div class="wrapper" *ngIf="loader">   
+    <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+</div>
+  
+<div *ngIf="!loader">    
+    <div class="container-fluid mt-3">
+
+        <h1 style="text-align: center;">Sign Up</h1>
+        <div class="row">
+
+            <div class="col-3"></div>
+            <div class="col-6">
+                <form [formGroup]="signUpFormGroup">
+                    <div class="form-group">  
+                      <label class="ml-2">Phone Number</label>
+                      <input type="number" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="phone" formControlName="phone" placeholder="Please enter your phone number">
+                    </div>
+        
+                    <div class="form-group">              
+                        <label class="ml-2">First Name</label>
+                        <input type="text" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="firstName" formControlName="firstName" placeholder="Please enter your first name">
+                    </div>
+        
+                    <div class="form-group">          
+                    <label class="ml-2">Last Name</label>    
+                    <input type="text" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="lastName" formControlName="lastName" placeholder="Please enter your last name">
+                    </div>
+        
+                    <div class="form-group">              
+                    <label class="ml-2">Pin Code</label>    
+                    <input type="number" style="border: 5px solid transparent;background: #F8F9FB;border-radius: 1000px;width: 100%;height: 50px;" class="form-control input-text" id="pincode" formControlName="pincode" placeholder="Please enter your pin code">
+                    </div>
+                </form>   
+            </div>
+            <div class="col-3"></div>
+
+            <div class="col-3"></div>
+            <div class="col-6">
+            
+                <button class="form-control btn btn-sm question" style="height: 50px;width:100%;" id="confirmBtn" type="button" (click)="signUp()"><span class="question-text">Create Account</span></button>
+            
+            </div>
+            <div class="col-3"></div>
+
+        </div>
+
+    </div>  
+
+</div>
