@@ -3,14 +3,68 @@
     margin-left: 1rem !important;
     margin-right: 1rem !important;
 }
-
+.card{
+  box-shadow: 1px 2px 10px 0 #c4bff8 !important;
+  text-align: center;
+  font-size: 40px;
+}
 .wrapper {
     display: flex; 
     justify-content: center; 
     align-items: center;
     height: calc(100vh - 20px);    
     }
+
+    .tabs{
+      cursor: pointer;
+      box-shadow: 1px 2px 10px 0 #c4bff8 !important;
     
+      background-color: #ADA6F8;
+     
+    }
+    .img{
+      width: 47px;
+    position: relative;
+    bottom: 11px;
+    }
+    .dealer{
+      font-weight: 400;
+    color: #bc7328;
+    font-size: 35px;
+    text-align: center;
+    }
+    .type{
+      font-size: 25px;
+    font-weight: 400;
+    color: #174074;
+    }
+    .head{
+      text-align: center;
+    color: #17205d;
+    font-size: 27px;
+    font-weight: 500;
+    }
+    .time{
+      text-align: center;
+    background: #dee0e99c;
+    padding: 10px;
+    border-radius: 12px;
+    color: #972b01;
+    }
+    .tabs h2{
+      font-size: 30px;
+      text-align: center;
+      color:#fff;
+    }
+    .tabs:active {
+      background-color: yellow!important;
+    }
+    h3{
+      margin-top: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #131a3a;
+    }
     .fab-container {
         position: fixed;
         bottom: 15px;

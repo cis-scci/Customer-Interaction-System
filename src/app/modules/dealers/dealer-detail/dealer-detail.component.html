@@ -3,51 +3,54 @@
 </div>
 
 <div style="margin:0 auto;" class="container-fluid" *ngIf= "!loader && !showSms">
-    <div class="row">
-        <div class="col-7">
+    <div class="">
+        <div class=" mt-4 mb-3">
             <div class="row">
-                <div class="col-4"></div>
-                <div class="col-8"> <h1 style="text-align: center;">{{dealerDetail.DealershipName}} <img src="assets/images/crown.PNG" alt="no image"> </h1></div>
+                
+           
+              <div class="col-md-4 col-12">  <h3 style="text-align: center;" class="time">Member from {{dealerDetail.BusinessWithSCCI}}</h3></div>
+              <div class="col-md-5 col-12"> <h3 style="text-align: center;" ><span class="dealer mt-1 mb-1">{{dealerDetail.DealershipName}} </span> <span class="type">({{dealerDetail.DealerTypeName}})</span> <img src="assets/images/crown.PNG" alt="no image" class="img"></h3></div>
+              <div class="col-md-3 col-12 mt-2 text-center"> <button mat-stroked-button color="primary" class="mb-1" style="width: 200px;" (click)="backToList()">Go to dealer list</button></div>
              </div>   
-             <div class="row">
+             <!-- <div class="row">
                 <div class="col-6"></div>
-                <div class="col-3"> <h1 style="text-align: center;background: #f1fae7;border-radius: 15px;">{{dealerDetail.DealerTypeName}}</h1></div>
-                <div class="col-3"></div>
-             </div>   
+                <div class="col-md-3 col-12"> <h1 style="text-align: center;background: #f1fae7;border-radius: 15px;"></h1></div>
+                <div class="col-md-3 col-12"></div>
+             </div>    -->
         </div>
 
-        <div class="col-5">
+        <!-- <div class="col-5">
             <div class="row">
-                <div class="col-7 mt-3" style="background: #fdfacf;border-radius: 15px;"> <h3 style="text-align: center;">Member from {{dealerDetail.BusinessWithSCCI}}</h3> </div>
-                <div class="col-5 mt-3">
-                  <button mat-stroked-button color="primary" class="mb-1" style="float: right;width: 200px;" (click)="backToList()">Go to dealer list</button>
+                <div class="col-7 mt-3" style="background: #fdfacf;border-radius: 15px;"> </div> -->
+                <!-- <div class="col-5 mt-3">
+                 
                 </div>
              </div>   
-        </div>
+        </div> --> 
     </div>
 
-    <div class="row ml-5 mr-5">
-        <div class="col-3">
-            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #c4bff8 !important;">
-                <h1 style="text-align: center;font-size: 60px;">{{dealerDetail.OrderCount}}</h1>
-                <h1 style="text-align: center;">Orders</h1>
+    <div class="row">
+        <div class="col-md-3 col-12">
+            <mat-card class="mat-elevation-z8 card">
+                <h1 style="text-align: center;">{{dealerDetail.OrderCount}}</h1>
+                <h1 class="head">Orders</h1>
              </mat-card>
         </div>
-        <div class="col-3">
-            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #f9b694 !important;">
-                <h1 style="text-align: center;font-size: 60px;">{{dealerDetail.OrderValue}}</h1>
-                <h1 style="text-align: center;">Business</h1>
+        <div class="col-md-3 col-12">
+            <mat-card class="mat-elevation-z8 card" >
+                <h1 style="text-align: center;">{{dealerDetail.OrderValue}}</h1>
+                <h1 class="head">Business</h1>
              </mat-card>
         </div>
-        <div class="col-3">
-            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #4cc5ec !important;">
-                <h1 style="text-align: center;font-size: 60px;">{{dealerDetail.OnlinePaymentPercentage}}%</h1>
-                <h1 style="text-align: center;">Online Payment</h1>
+        <div class="col-md-3 col-12">
+            <mat-card class="mat-elevation-z8 card">
+                <h1 style="text-align: center;">{{dealerDetail.OnlinePaymentPercentage}}%</h1>
+                <h1 class="head">Online Payment</h1>
              </mat-card>
         </div>
-        <div class="col-3">
-            <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #f3d092 !important;">
-                <h1 style="text-align: center;">GPMember</h1>
+        <div class="col-md-3 col-12">
+            <mat-card class="mat-elevation-z8 card">
+                <h1 class="head">GPMember</h1>
                 <h1 *ngIf="!dealerDetail.GoldenGatePassHolder" style="text-align: center;color:red">NO <a style="font-size: 20px;color: blue;text-align: right;float: right;">Invite</a></h1>
                 <h1 *ngIf="dealerDetail.GoldenGatePassHolder" style="text-align: center;color:green">YES</h1>
              </mat-card>
@@ -55,23 +58,23 @@
     </div>
 
 
-    <div class="row ml-5 mr-5 mt-5">
-        <div class="col-3">
+    <div class="row mt-5">
+        <div class="col-md-3 col-12 mt-2 mb-2">
             <mat-card (click)="showDetails(1)" class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #c4bff8 !important;color:#c4bff8;background-color: #ADA6F8;">
                 <h2 style="text-align: center;color: white;font-size: 50px;">Dealer Details</h2>
              </mat-card>
         </div>
-        <div class="col-3">
+        <div class="col-md-3 col-12  mt-2 mb-2">
             <mat-card (click)="showDetails(2)" class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #f9b694 !important;background-color: #f9b694;">
                 <h2 style="text-align: center;color: white;font-size: 50px;">Order Details</h2>
              </mat-card>
         </div>
-        <div class="col-3">
+        <div class="col-md-3 col-12  mt-2 mb-2">
             <mat-card (click)="showDetails(3)" class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #4cc5ec !important;background-color: #4cc5ec;">
                 <h2 style="text-align: center;color: white;font-size: 50px;">Payments</h2>
              </mat-card>
         </div>
-        <div class="col-3">
+        <div class="col-md-3 col-12  mt-2 mb-2">
             <mat-card class="mat-elevation-z8" style="cursor:pointer;box-shadow: 1px 2px 10px 0 #f3d092 !important;background-color: #f3d092;">
                 <h2 style="text-align: center;color: white;font-size: 50px;">Misc</h2>
              </mat-card>
@@ -81,28 +84,29 @@
 
   <!-- Dealer Details Starts  -->
     <div *ngIf="showDetailId == 1">
-        <div class="row ml-5 mr-5 mt-5">
-            <div class="col-5 mt-2">
-                <b style="font-size: 25px;color: black;">Dealership Name</b> <br>
+      <mat-card class="mt-5 mb-2">
+        <div class="row mt-5 mb-2">
+            <div class=" col-md-4 col-12">
+                <h3 style="margin-top: 0px;">Dealership Name</h3>
                 <mat-form-field class="example-full-width" style="width: 100%;">                                     
                     <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DealershipName">
                  </mat-form-field>
             </div>
-            <div class="col-7">
+            <div class=" col-md-7 col-12">
                 <div class="row">
-                   <div class="col-4">
+                   <div class=" col-md-4 col-12">
                     <h3 style="margin-top: 0px;">GST Number</h3>
                     <mat-form-field class="example-full-width" style="width: 100%;">                                     
                         <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.GSTNo">
                      </mat-form-field>
                    </div>
-                   <div class="col-4">
+                   <div class="col-md-4 col-12">
                     <h3 style="margin-top: 0px;">Contact Person Name</h3>
                     <mat-form-field class="example-full-width" style="width: 100%;">                                     
                         <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.ContactPerName">
                      </mat-form-field>
                    </div>
-                    <div class="col-4">
+                    <div class="col-md-4 col-12">
                         <h3 style="margin-top: 0px;">Registered Mob. Number</h3>
                         <mat-form-field class="example-full-width" style="width: 100%;">                                     
                             <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PhoneNo">
@@ -111,38 +115,38 @@
                 </div>                
             </div>
         </div>
-    
+    </mat-card>
 
 
-    <div class="ml-5 mr-5 mt-5">
+    <div class="">
         <b style="font-size: 25px;color: black;">Dealership Registered Address</b>
        <mat-card>
         <div class="row">               
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <h3>Address</h3>
                  <mat-form-field appearance="outline" style="width: 100%;">                    
                     <textarea matInput style="font-size: 30px;height: 150px;font-weight: 300;color: #373e43;text-align: center;" disabled [value]="dealerDetail.Address"></textarea>
                   </mat-form-field>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <h3 style="margin-top: 0px;">District</h3>
-                        <mat-form-field class="example-full-width">                                     
+                        <mat-form-field class="example-full-width" style="width: 100%;">                                     
                             <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistrictName">
                          </mat-form-field>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <h3 style="margin-top: 0px;">PIN</h3>
-                        <mat-form-field class="example-full-width">                                     
+                        <mat-form-field class="example-full-width" style="width: 100%;">                                     
                             <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PINCode">
                          </mat-form-field>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <h3 style="margin-top: 0px;">State</h3>
-                        <mat-form-field class="example-full-width">                                     
+                        <mat-form-field class="example-full-width" style="width: 100%;">                                     
                             <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.StateName">
                          </mat-form-field>
                     </div>
@@ -153,35 +157,35 @@
       </mat-card>
     </div>
 
-    <div class="ml-5 mr-5 mt-5">
+    <div class="">
         <b style="font-size: 25px;color: black;">Delivery Address</b>
        <mat-card>
         <div class="row">               
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <h3>Address</h3>
                  <mat-form-field appearance="outline" style="width: 100%;">                    
                     <textarea matInput style="font-size: 30px;height: 150px;font-weight: 300;color: #373e43;text-align: center;" disabled [value]="dealerDetail.Address"></textarea>
                   </mat-form-field>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <h3 style="margin-top: 0px;">District</h3>
-                        <mat-form-field class="example-full-width">                                     
+                        <mat-form-field class="example-full-width" style="width: 100%;">                                     
                             <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistrictName">
                          </mat-form-field>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <h3 style="margin-top: 0px;">PIN</h3>
-                        <mat-form-field class="example-full-width">                                     
+                        <mat-form-field class="example-full-width" style="width: 100%;">                                     
                             <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PINCode">
                          </mat-form-field>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <h3 style="margin-top: 0px;">State</h3>
-                        <mat-form-field class="example-full-width">                                     
+                        <mat-form-field class="example-full-width" style="width: 100%;">                                     
                             <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.StateName">
                          </mat-form-field>
                     </div>
@@ -192,33 +196,33 @@
       </mat-card>
     </div>
 
-    <div class="ml-5 mr-5 mt-5 mb-5">
+    <div class="">
         <b style="font-size: 25px;color: black;">Business Details</b>
        <mat-card>
 
         <div class="row">    
                        
-            <div class="col-4">
+            <div class="col-md-4 col-12">
                 <h3>Dealing in</h3><br>
 
                <div class="row">
-                   <div class="col-6">
+                   <div class="col-md-6 col-12">
                     <section>
                         <mat-checkbox [checked]="dealerDetail.EngineOils" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Engine Oils</span></mat-checkbox>
                     </section>
                    </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                     <section>
                             <mat-checkbox [checked]="dealerDetail.Coolants" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Coolants</span></mat-checkbox>
                     </section>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                     <section>
                         <mat-checkbox [checked]="dealerDetail.BrakeFluids" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Brake Fluids</span></mat-checkbox>
                     </section>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                     <section>
                             <mat-checkbox [checked]="dealerDetail.Others" disabled><span style="font-size: 20px;font-weight: 300;color: #373e43;text-align: center;">Others</span></mat-checkbox>
                     </section>
@@ -229,14 +233,14 @@
 
             </div>
 
-            <div class="col-2 mt-5">
+            <div class="col-md-2 col-12 mt-5">
                 <h3 style="margin-top: 0px;">Monthly Turnover</h3>
                 <mat-form-field class="example-full-width">                                     
                     <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" value=">100000">
                  </mat-form-field>
             </div>
 
-            <div class="col-3">
+            <div class="col-md-3 col-12">
                 <h3>Payment Methods</h3><br>
 
                <div class="row">
@@ -255,17 +259,17 @@
 
             </div>
 
-            <div class="col-3">
+            <div class="col-md-3 col-12">
                <div class="row">                
                    <div class="col-12">                    
                     <h3>UPI ID</h3>
-                    <mat-form-field class="example-full-width">                                     
+                    <mat-form-field class="example-full-width" style="width: 100%;">                                     
                         <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.VirtualPaymentAddress">
                      </mat-form-field>                    
                    </div>
                     <div class="col-12">                    
                     <h3>Paytm Number</h3>
-                    <mat-form-field class="example-full-width">                                     
+                    <mat-form-field class="example-full-width" style="width: 100%;">                                     
                         <input matInput style="font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.PaytmNo">
                      </mat-form-field>
                     </div>
@@ -278,21 +282,21 @@
         </div>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4 col-12">
                 <h3>Distributor Name</h3>
                 <mat-form-field class="example-full-width" style="width: 100%;">
                     <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistrictName">
                  </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-md-4 col-12">
                 <h3>Contact Person Name</h3>
                 <mat-form-field class="example-full-width" style="width: 100%;">
                     <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistributorContactPerName">
                  </mat-form-field>
             </div>
 
-            <div class="col-4">
+            <div class="col-md-4 col-12">
                 <h3>eMail Id</h3>
                 <mat-form-field class="example-full-width" style="width: 100%;">
                     <input matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.EMail1">
@@ -302,7 +306,7 @@
         </div>
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <h3>Distributor Address</h3>
                 <mat-form-field class="example-full-width" style="width: 100%;">
                     <textarea matInput style="margin-top: 0px;font-size: 30px;font-weight: 300;color: #373e43;text-align: center;" [value]="dealerDetail.DistributorAddress"></textarea>
@@ -319,15 +323,15 @@
   <!-- Dealer Details Starts  -->  
   <div *ngIf="showDetailId == 2">
 
-      <div class="row ml-5 mr-5 mt-5">
-        <div class="col-12 mt-2">
+      <div class="row mt-5">
+        <div class="container-fluid mt-2">
             <mat-tab-group (selectedTabChange)="getOrderDetails($event)">
                 <mat-tab label="Open"> 
                     
                     <div class="container-fluid">
                         <div class="table-container">
-                          <div class="card card-bordered">
-                            <div class="card-body">
+                          <div class="">
+                            <div class="">
                               
                               <!-- <form class="example-form">
                                 <mat-form-field class="example-full-width">
@@ -336,7 +340,7 @@
                                 </mat-form-field>          
                               </form> -->
                       
-                            <div class="example-container mat-elevation-z8"  *ngIf= "!loader">
+                            <div class="example-container mat-elevation-z8"  *ngIf= "!loader" >
                       
                               <mat-table [dataSource]="dataSource" matSort>     
                       
@@ -391,8 +395,8 @@
                 <mat-tab label="Completed"> 
                     <div class="container-fluid">
                         <div class="table-container">
-                          <div class="card card-bordered">
-                            <div class="card-body">
+                          <div class="">
+                            <div class="">
                               
                               <!-- <form class="example-form">
                                 <mat-form-field class="example-full-width">
@@ -455,8 +459,8 @@
                 <mat-tab label="Cancelled"> 
                     <div class="container-fluid">
                         <div class="table-container">
-                          <div class="card card-bordered">
-                            <div class="card-body">
+                          <div class="">
+                            <div class="">
                               
                               <!-- <form class="example-form">
                                 <mat-form-field class="example-full-width">
@@ -529,7 +533,7 @@
 <div style="margin:0 auto;" class="container-fluid" *ngIf= "!loader && showSms">
 
   <div class="row">
-     <div class="col-3"></div>
+     <div class="col-md-3 col-12"></div>
      <div class="col-6">
       <mat-card class="mat-elevation-z8" style="box-shadow: 1px 2px 10px 0 #c4bff8 !important;">
         <div class="row">
@@ -566,7 +570,7 @@
         </div>
       </mat-card>
      </div>
-     <div class="col-3"></div>
+     <div class="col-md-3 col-12"></div>
   </div>
 
 </div>
