@@ -11,7 +11,46 @@ main{
         opacity: 0.4;
     }
 }
+.onboarding-card a{
+    color: rgb(253, 252, 252);cursor: pointer;float: right;
+}
+.onboarding-card h3 {
+    color: #fff;
+}
+.onboarding-card h4 {
+    color: #fff;
+}
+.payments-card a{
+    color: rgb(253, 252, 252);cursor: pointer;float: right;
+}
+.payments-card h3{
+    color: #fff;
+}
+.payments-card h4{
+    color: #fff;
+}
 
+.payments-card{
+    height: 230px;background:#616684;
+  
+    color:#fff;
+}
+.onboarding-card{
+    background: #1251a7;
+    height: 230px;
+}
+.orders-card{
+    height: 230px;background: #8a8fea;
+}
+.orders-card a{
+    color: rgb(253, 252, 252);cursor: pointer;float: right;
+}
+.orders-card h3{
+    color: #fff;
+}
+.orders-card h4{
+    color: #fff;
+}
 mat-header-cell{
     font-size: larger;
 }

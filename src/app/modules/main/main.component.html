@@ -6,9 +6,9 @@
 <div class="container-fluid mt-3">
 
     <div class="row mt-4"  *ngIf= "!loader">
-      <div class="col-4">
-         <mat-card style="height: 230px;background: #f7ad94;">
-           <h3 style="text-align: center;font-weight: 500;">Orders <a style="color: black;cursor: pointer;float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>          
+      <div class="col-md-4 col-12 mb-2 mt-2">
+         <mat-card  class="orders-card">
+           <h3 style="text-align: center;font-weight: 500;">Orders <a style="float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>          
 
            <h4 style="font-weight: 400;">Total Orders: {{orderSummary.Order ? orderSummary.Order : 'NA' }} </h4>
            <h4 style="font-weight: 400;">Total Volume: {{orderSummary.Volume ? orderSummary.Volume : 'NA' }} </h4>
@@ -16,16 +16,16 @@
          </mat-card>
       </div>
 
-      <div class="col-4">
-        <mat-card style="height: 230px;background: #76aae6;">
-          <h3 style="text-align: center;font-weight: 500;">Onboarding <a style="color: black;cursor: pointer;float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
+      <div class="col-md-4 col-12 mb-2 mt-2">
+        <mat-card class="onboarding-card">
+          <h3 style="text-align: center;font-weight: 500;">Onboarding <a style="float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
           <h4 style="font-weight: 400;" *ngFor="let item of onBoarding">{{item.title}}: {{item.value ? item.value : 'NA' }} </h4>
         </mat-card>
       </div>
 
-     <div class="col-4">
-      <mat-card  style="height: 230px;background: #b4e481;">
-        <h3 style="text-align: center;font-weight: 500;">Payments <a style="color: black;cursor: pointer;float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
+     <div class="col-md-4 col-12 mb-2 mt-2">
+      <mat-card  class="payments-card">
+        <h3 style="text-align: center;font-weight: 500;">Payments <a style="float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
 
         <h4 style="font-weight: 400;">Online Collection: {{payments.Online ? payments.Online : '0' }} </h4>
         <h4 style="font-weight: 400;">Mandates: {{payments.Mandates ? payments.Mandates : '0' }} </h4>
