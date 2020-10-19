@@ -20,7 +20,7 @@ export class DealersComponent implements OnInit {
 
   displayedColumns: string[] = ['DealershipName', 'DistributorName','DistrictName','StateName','phone','Action','Call'];
   dataSource:any;
-
+  callInitiated : boolean = false;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -79,14 +79,13 @@ export class DealersComponent implements OnInit {
     this.router.navigate(["/dealers/" + id  + "/detail"]);
   }
 
-  callInitiate(){
-
+  callInitiate(phoneNo){    
     this.loader = true;
     // call api code here...
     
     let reqParams = {
-      "user_id":"5f7586e80ec11130",
-      "number":"+918860332223",
+      "user_id":"5f804e3f0815e380",
+      "number":"+91" + phoneNo,
       "reference_id": uuid.v4()
      }
 
@@ -99,7 +98,8 @@ export class DealersComponent implements OnInit {
         this.loader = false;
         //console.log(sucessResponse)
         if(sucessResponse.rs == 0){
-          this.toastr.success("Call initiated successfully!!");
+          //this.toastr.success("Call initiated successfully!!");
+          this.callInitiated = true;
         }
         else if(sucessResponse.rs == 1){
           this.toastr.error("Some problem occured in initiating the call. Kindly try again later!!");
@@ -110,6 +110,10 @@ export class DealersComponent implements OnInit {
         this.loader = false;
       })
       );    
+  }
+
+  closeModel(){
+    this.callInitiated = false;
   }
 
 }

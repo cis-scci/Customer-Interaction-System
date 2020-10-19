@@ -54,7 +54,7 @@ export class MainComponent implements OnInit {
     // call api code here...
     
     let reqParams = {
-      "StaffID": "10116",// localStorage.getItem("currentUser"),
+      "StaffID": localStorage.getItem("currentUser"),
       "Fromdate":"2019-08-01",
       "Todate":"2020-09-29"
      }

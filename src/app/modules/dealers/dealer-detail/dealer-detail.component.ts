@@ -8,6 +8,7 @@ import { HandelError , Dealer } from '../../../shared/enumrations/app-enum.enume
 import { GlobalRestService } from '../../../services/rest/global-rest.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { ToastrService } from 'ngx-toastr';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-dealer-detail',
@@ -151,8 +152,13 @@ export class DealerDetailComponent implements OnInit {
   }
 
   fabButtonClicked(btn){
+    console.log(btn)
     if(btn == "message"){
       this.showSms = true;
+    }
+    else if(btn == "phone"){
+      this.showSms = false;
+      this.callInitiate(this.dealerDetail.PhoneNo);
     }
   }
 
@@ -190,6 +196,39 @@ export class DealerDetailComponent implements OnInit {
     //   })
     //   );
 
+  }
+
+  callInitiate(phoneNo){
+
+    this.loader = true;
+    // call api code here...
+    
+    let reqParams = {
+      "user_id":"5f804e3f0815e380",
+      "number":"+91" + phoneNo,
+      "reference_id": uuid.v4()
+     }
+
+    this.restService.ApiEndPointUrlOrKey = Dealer.initiateCall;
+    this.restService.HttpPostParams = reqParams;
+    this.restService.AlertAndErrorAction = HandelError.ShowAndReturn;          
+    this.restService.callApi()
+      .subscribe(
+      (sucessResponse => {     
+        this.loader = false;
+        //console.log(sucessResponse)
+        if(sucessResponse.rs == 0){
+          this.toastr.success("Call initiated successfully!!");
+        }
+        else if(sucessResponse.rs == 1){
+          this.toastr.error("Some problem occured in initiating the call. Kindly try again later!!");
+        }
+      }),
+      (err => {
+        this.toastr.error("Some problem occured in initiating the call. Kindly try again later!!");
+        this.loader = false;
+      })
+      );    
   }
 
   backToList(){

@@ -56,7 +56,7 @@
             <mat-header-cell *matHeaderCellDef> Call </mat-header-cell>
             <mat-cell *matCellDef="let row" data-label="Call"> 
               
-              <i style="cursor: pointer;"  class="material-icons">phone</i>
+              <i style="cursor: pointer;" (click)="callInitiate(row.phone)"  class="material-icons">phone</i>
               
             </mat-cell>
           </ng-container>
@@ -76,4 +76,23 @@
   </div>
 
 </div>
-  
+
+<!-- Modal -->
+<div class="modal in" id="exampleModalCenter" tabindex="-1" role="dialog" [style.display]="callInitiated ? 'block' : 'none'" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Call Initiated Successfully !!</h3>
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" (click)="closeModel()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

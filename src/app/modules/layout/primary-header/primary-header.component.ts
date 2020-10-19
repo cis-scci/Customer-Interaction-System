@@ -13,6 +13,7 @@ export class PrimaryHeaderComponent implements OnInit, OnDestroy {
   public config : any;
   public subscriptions: Subscription[] = [];
   public user_name: any;
+  public user_phonenumber: any;  
   public user_type: any
   //Setting up page title
   // @Input() get pageTitle() {
@@ -30,6 +31,7 @@ export class PrimaryHeaderComponent implements OnInit, OnDestroy {
     //Setting up page title
     this.setPageTitle();
     this.user_name = localStorage.getItem('user_name');
+    this.user_phonenumber = localStorage.getItem('user_phonenumber');    
     this.user_type = localStorage.getItem('user_type');
     // this.setBackButtonConfig();
     // this.config = {

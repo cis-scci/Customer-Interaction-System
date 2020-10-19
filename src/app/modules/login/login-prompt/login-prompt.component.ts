@@ -32,6 +32,7 @@ export class LoginPromptComponent implements OnInit {
     
     localStorage.removeItem("currentUser");
     localStorage.removeItem("user_name");
+    localStorage.removeItem("user_phonenumber");
     localStorage.removeItem("user_type");
   }
 
@@ -80,6 +81,7 @@ export class LoginPromptComponent implements OnInit {
           {
             localStorage.setItem('currentUser', Number(sucessResponse.data.LoginData[0].StaffID).toString());
             localStorage.setItem('user_name', sucessResponse.data.LoginData[0].StaffName);
+            localStorage.setItem('user_phonenumber', sucessResponse.data.LoginData[0].PhoneNo);
             localStorage.setItem('user_type', sucessResponse.data.LoginData[0].BaseLocation);
             this.router.navigate(['/dashboard']);
           }
@@ -93,6 +95,7 @@ export class LoginPromptComponent implements OnInit {
 
             localStorage.removeItem("currentUser");
             localStorage.removeItem('user_name');
+            localStorage.removeItem('user_phonenumber');
             localStorage.removeItem('user_type');
           }
       }, errorResponse => {
@@ -101,6 +104,7 @@ export class LoginPromptComponent implements OnInit {
           this.errMessage = 'Username or password is incorrect';
           localStorage.removeItem("currentUser");
           localStorage.removeItem('user_name');
+          localStorage.removeItem('user_phonenumber');
           localStorage.removeItem('user_type');
         }
       );

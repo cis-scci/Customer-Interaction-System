@@ -29,7 +29,8 @@ export class ApprovalComponent implements OnInit {
   selectedCalculateNetPayableDetails : any = [];
   query : string = "";
   modalRef: BsModalRef;    
-
+  orderPlaced : boolean = false;
+  orderId : string = "";
   constructor(private modalService: BsModalService,private toastr: ToastrService,private restService: GlobalRestService,private primaryHeader: PrimaryHeaderService,private route: ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
@@ -358,7 +359,9 @@ export class ApprovalComponent implements OnInit {
         //console.log(sucessResponse)
         if(sucessResponse.rs == 0){
           let orderId = sucessResponse.data.Order[0].OrderID;          
-          this.toastr.success("Order has been successfully created and sent for approval with order number :- " + orderId + "!!");
+          //this.toastr.success("Order has been successfully created and sent for approval with order number :- " + orderId + "!!");
+          this.orderPlaced = true;
+          this.orderId = orderId;
           this.calculateNetPayableDetails = [];
           this.selectedCalculateNetPayableDetails = [];
           this.orderItems = [];
@@ -438,6 +441,11 @@ export class ApprovalComponent implements OnInit {
 
   backToList(){
     this.router.navigate(["/dealers"]);
+  }
+
+  
+  closeModel(){
+    this.orderPlaced = false;
   }
 
 }
