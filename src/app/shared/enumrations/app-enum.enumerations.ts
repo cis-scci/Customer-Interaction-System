@@ -32,6 +32,17 @@ export enum Dealer {
 }
 
 export enum Dashboard {
-   getDashboardDetails = "getDashboardDetails"
+  getDashboardOrderDetails = "getDashboardOrderDetails",
+   getDashboardOnboardingDetails = "getDashboardOnboardingDetails"
 }
 
+export enum LeaderBoard {
+  getLeadershipBoardDetails = "getLeadershipBoardDetails"
+}
+
+export enum Configurator {
+  getConfiguratorProducts = "getConfiguratorProducts",
+  getConfiguratorDistributors = "getConfiguratorDistributors",
+  updateConfiguratorDiscounts = "updateConfiguratorDiscounts",
+  DistributorSKUDiscount = "DistributorSKUDiscount"
+}

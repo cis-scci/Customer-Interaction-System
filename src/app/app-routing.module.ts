@@ -21,7 +21,6 @@ const routes: Routes = [
       }
     ]
   },
-
   {
     path: '',
     data: {
@@ -44,6 +43,14 @@ const routes: Routes = [
       {
         path: 'dealers/add/address/:id/:pincode',
         loadChildren: () => import('./modules/add-address/add-address.module').then(m => m.AddAddressModule)
+      },
+      {
+        path: 'leaderboard',
+        loadChildren: () => import('./modules/leaderboard/leaderboard.module').then(m => m.LeaderboardModule)
+      },
+      {
+        path: 'leaderboard-congrats',
+        loadChildren: () => import('./modules/leaderboard-congrats/leaderboard-congrats.module').then(m => m.LeaderboardCongratsModule)
       }
     ]
   },  

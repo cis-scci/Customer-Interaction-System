@@ -1,0 +1,119 @@
+  .heading{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height */
+    
+    text-transform: capitalize;
+    
+    color: #FFFFFF;  
+  }
+
+.desc{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    /* identical to box height */
+    
+    text-transform: uppercase;
+    
+    color: #FFFFFF;
+}  
+
+.scannedPoints{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;    
+    color: #FFFFFF;
+}
+
+
+
+  .main_bg{
+  height: 220px;
+  background: linear-gradient(121.46deg, #00587C 8.88%, #00587C 79.7%);
+  }
+  .paragraph{
+    font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 180%;
+  /* or 22px */
+  
+  
+  color: #555964;
+  text-align: justify;
+  }
+  .gatepass{
+    font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  color: #FFFFFF;
+  }
+  .img_cheakout{
+    width: 50px;
+    height: 50px;
+  }
+  
+  .main_text{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  /* identical to box height */
+  
+  
+  color: #182160;
+  }
+  .main_text1{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 180%;
+    color: #555964;  
+  }
+
+  .wrapper {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    height: calc(100vh - 20px);    
+  }
+
+  .ranking{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 180%;
+    /* identical to box height, or 29px */
+    
+    text-align: center;
+    
+    color: #182160;
+    
+  }
+
+  .scannedNumber{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 180%;
+    /* or 25px */
+    
+    text-align: right;
+    
+    color: #182160;
+    
+  }

@@ -36,7 +36,15 @@
           "route": "/dealers/signup",
           "icon": "",
           "css": ""
-        } 
+        },
+        {
+          "id": 4,
+          "name": "Leader Board",
+          "desc": "",
+          "route": "/leaderboard",
+          "icon": "",
+          "css": ""
+        }        
       ]
     }
   ],
@@ -46,24 +54,24 @@
       "userLogin": {
         "desc": "Login",
         "method": "POST",
-        "url": "http://dev.scci.co.in:88/V1/CIS/api/Login/StaffLogin?email=#email&password=#password"
+        "url": "http://udev.scci.co.in:88/CIS/api/Login/StaffLogin?email=#email&password=#password"
       }
     },    
     "_dealers": {
       "getDealerList": {
         "desc": "Get Dealer List",
         "method": "GET",
-        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/StaffDealerList?StaffID=#staffId"
+        "url": "http://udev.scci.co.in:88/CIS/api/StaffDealer/StaffDealerList?MarketingRepID=#MarketingRepID"
       },
       "getDealerDetail": {
         "desc": "Get Dealer Detail",
         "method": "GET",
-        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/DealerDetails?DealerID=#dealerId"
+        "url": "http://udev.scci.co.in:88/CIS/api/StaffDealer/DealerDetails?DealerID=#dealerId"
       },
       "getOrderDetail": {
         "desc": "Get Order Detail",
         "method": "GET",
-        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/OrderDetails?DealerID=#dealerId&OrderStatusID=#orderStatus"
+        "url": "http://udev.scci.co.in:88/CIS/api/StaffDealer/OrderDetails?DealerID=#dealerId&OrderStatusID=#orderStatus"
       },
       "sendSMS": {
         "desc": "Send SMS",
@@ -123,15 +131,49 @@
       "getDashboardDetails": {
         "desc": "Get Dashboard Details",
         "method": "POST",
-        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/CISDashbaord"
+        "url": "http://udev.scci.co.in:88/CIS/api/StaffDealer/CISDashbaord"
       }
     },    
     "_dashboard": {
-      "getDashboardDetails": {
+      "getDashboardOrderDetails": {
         "desc": "Get Dashboard Details",
         "method": "POST",
-        "url": "http://dev.scci.co.in:88/V1/CIS/api/StaffDealer/CISDashbaord"
+        "url": "http://udev.scci.co.in:88/CIS/api/StaffDealer/CISDashbaord"
+      },
+      "getDashboardOnboardingDetails": {
+        "desc": "Get Dashboard Onboarding Details",
+        "method": "POST",
+        "url": "http://udev.scci.co.in:88/CIS/api/StaffDealer/CISDealerOnboarding"
       }
-    } 
+    },
+    "_leaderboard": {
+      "getLeadershipBoardDetails": {
+        "desc": "Get Leadership Board Details",
+        "method": "GET",
+        "url": "http://udev.scci.co.in:88/CIS/api/StaffDealer/Leadershipboard?MarketingRepID=#MarketingRepID"
+      }
+    },
+    "_configurator": {
+      "getConfiguratorProducts": {
+        "desc": "Get Configurator Products List",
+        "method": "GET",
+        "url": "http://udev.scci.co.in:8888/DiscountConfigAPI/api/DiscountConfig/GetProducts"        
+      },
+      "getConfiguratorDistributors": {
+        "desc": "Get Configurator Distributors List",
+        "method": "GET",
+        "url": "http://udev.scci.co.in:8888/DiscountConfigAPI/api/DiscountConfig/DistributorList"
+      },
+      "updateConfiguratorDiscounts": {
+        "desc": "Update Configurator Discounts",
+        "method": "POST",
+        "url": "http://udev.scci.co.in:8888/DiscountConfigAPI/api/DiscountConfig/InserUpdateDistributorSKUDiscount"
+      },
+      "DistributorSKUDiscount": {
+        "desc": "Get Configurator Distributors List for varying discount",
+        "method": "GET",
+        "url": "http://udev.scci.co.in:8888/DiscountConfigAPI/api/DiscountConfig/DistributorSKUDiscount?ProductID=#ProductID"
+      }    
+    }   
   }
 }

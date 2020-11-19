@@ -69,5 +69,6 @@ export class FilterService {
   public filterResponse: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public customerResponse: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public formGroupValue : BehaviorSubject<any>  = new BehaviorSubject<any>({});
-
+  public selfieUploaded: BehaviorSubject<any> = new BehaviorSubject<any>("");
+  
 }

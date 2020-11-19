@@ -1,0 +1,69 @@
+<div class="wrapper" *ngIf="loader">   
+    <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+</div>
+
+     <div *ngIf="!loader">
+
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="main_bg">
+            <div class="row">
+              <div class="col-12 pl-5 pt-5">
+                <div class="gatepass">              
+                <p class="heading"> <b>Leaderboard</b></p>
+              </div>
+              </div>
+            </div>
+  
+            <div class="row" *ngIf="leaderboardDetails">
+              <div class="col-3 pt-3" style="padding-left: 40px;">
+                  <div>
+                      <img [src]="'http://udev.scci.co.in:88' + leaderboardDetails.MarketingData[0].ImageURL" alt="Not Found" style="width: 50px;height: 50px;float: left;border-radius: 50%;" class="img-fluid mx-auto d-block">
+                  </div> 
+              </div>                
+  
+              <div class="col-4 pl-1 pt-3">
+                  <p class="desc">LITRES SOLD</p>
+                  <img src="assets/images/Union.png" style="float: left;" class="img-fluid mx-auto d-block lock_img_1">
+                  <span class="scannedPoints pl-2">{{leaderboardDetails.MarketingData[0].Liter}}</span>
+              </div>
+  
+              <div class="col-2  pt-4" style="padding-left: 0px;">
+                  <img src="assets/images/upArrow.png" style="float: left;height: 20px;" class="img-fluid mx-auto d-block lock_img_1">
+              </div>
+  
+            </div>        
+            
+            <div class="pt-4">
+                <mat-card class="ml-3 mr-3 mt-2" style=" border-radius: 10px;" *ngFor="let item of leaderboardDetails.ListOfMarketing;let i = index">
+                  <div class="row">
+                      <div class="col-1">
+                        <span class="ranking"> {{i!=9 ? 0 : '' }}{{i + 1}} </span>
+                      </div>
+                      <div class="col-2" style="padding-right: 0px;">
+                          <img [src]="'http://udev.scci.co.in:88' + item.ImageURL" alt="Not Found" style="width: 40px;height: 40px;float: left;border-radius: 50%;" class="img-fluid mx-auto d-block">
+                      </div>
+                      <div class="col-6">
+                          <span class="main_text1"> {{item.MarketingRepName}} </span>
+                      </div>
+                      <div class="col-1" style="padding-left: 0px;padding-right: 0px;">
+                          <img src="assets/images/Union_Blue.png" style="margin-left:0px !important;margin-right:0px !important" alt="Not Found" class="img-fluid mx-auto d-block pt-1">
+                      </div>
+                      <div class="col-1" style="padding-left: 0px;padding-right: 0px;">
+                          <span class="scannedNumber">{{item.Liter}} Litres</span>
+                      </div>                    
+                  </div>
+                </mat-card>              
+                <!-- <mat-card class="ml-4 mr-4 mt-3" style="height: 70px; border-radius: 10px;">asdff  </mat-card>               -->
+            </div>
+          
+  
+  
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+
+      </div>
+
+     </div>

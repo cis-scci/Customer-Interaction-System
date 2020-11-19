@@ -1,0 +1,33 @@
+<div class="wrapper" *ngIf="loader">   
+    <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner> 
+  </div>
+  
+  
+  
+    <div class="bg" *ngIf="!loader">
+      <div class="container-fluid">
+        <div class="pt-4">
+         <!-- <i class="fa fa-chevron-left icon" (click)="goBack()"></i>  -->
+       </div>
+         <div class="won">
+            <img src="assets/images/leaderboard_win.png" class="img-fluid mx-auto d-block won_img">
+            <div class="won_text pt-5">
+              <span><b> Congratulations </b></span>
+            </div>
+            <div class="won_text2 p-3">
+              <span class="text-center">You achieve number one position in leaderboard.</span>
+            </div>
+  
+            <div class="row">
+              <div class="col-12 text-center  pl-5 pr-5" *ngIf="selfieFlag == 'false'">                
+                <label for="files" class="btn addPoints">Send your selfie</label>
+                 <input id="files" style="visibility:hidden;" (change)="addSelfie($event)" type="file">
+              </div>
+              <div class="col-12 text-center">
+                    <a (click)="viewAll()" style="cursor: pointer;color:#00587C">View All</a>
+              </div>
+           </div>
+  
+         </div>
+     </div>
+   </div>

@@ -7,35 +7,39 @@
 
     <div class="row mt-4"  *ngIf= "!loader">
       <div class="col-md-4 col-12 mb-2 mt-2">
+        <a style="cursor: pointer;" (click)="getDashboardOrderDetails()">
          <mat-card  class="orders-card">
-           <h3 style="text-align: center;font-weight: 500;">Orders <a style="float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>          
+           <h3 style="text-align: center;font-weight: 500;">Orders <a style="float: right;">  </a></h3>          
 
            <h4 style="font-weight: 400;">Total Orders: {{orderSummary.Order ? orderSummary.Order : 'NA' }} </h4>
            <h4 style="font-weight: 400;">Total Volume: {{orderSummary.Volume ? orderSummary.Volume : 'NA' }} </h4>
            <h4 style="font-weight: 400;">Orders Value: {{orderSummary.Value ? orderSummary.Value : 'NA' }} </h4>
          </mat-card>
+        </a>
       </div>
 
       <div class="col-md-4 col-12 mb-2 mt-2">
-        <mat-card class="onboarding-card">
-          <h3 style="text-align: center;font-weight: 500;">Onboarding <a style="float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
-          <h4 style="font-weight: 400;" *ngFor="let item of onBoarding">{{item.title}}: {{item.value ? item.value : 'NA' }} </h4>
-        </mat-card>
+        <a style="cursor: pointer;" (click)="getDashboardOnboardingDetails()">
+          <mat-card class="onboarding-card">
+            <h3 style="text-align: center;font-weight: 500;">Onboarding <a style="float: right;">  </a></h3>
+            <h4 style="font-weight: 400;" *ngFor="let item of onBoarding">{{item.title}}: {{item.value ? item.value : 'NA' }} </h4>
+          </mat-card>
+        </a>
       </div>
 
      <div class="col-md-4 col-12 mb-2 mt-2">
       <mat-card  class="payments-card">
-        <h3 style="text-align: center;font-weight: 500;">Payments <a style="float: right;"> <i class="glyphicon glyphicon-info-sign ml-2"></i> </a></h3>
+        <h3 style="text-align: center;font-weight: 500;">Payments <a style="float: right;">  </a></h3>
 
-        <h4 style="font-weight: 400;">Online Collection: {{payments.Online ? payments.Online : '0' }} </h4>
-        <h4 style="font-weight: 400;">Mandates: {{payments.Mandates ? payments.Mandates : '0' }} </h4>
-        <h4 style="font-weight: 400;">Mandates Failed: {{payments.MandatesFail ? payments.MandatesFail : '0' }} </h4>
+        <h4 style="font-weight: 400;">Online Collection: {{payments.AdvanceOnlinePayment ? payments.AdvanceOnlinePayment : '0' }} </h4>
+        <h4 style="font-weight: 400;">Credit Collection: {{payments.MandateCreditCollection ? payments.MandateCreditCollection : '0' }} </h4>
+        <h4 style="font-weight: 400;">Credit Due: {{payments.MandateCreditPending ? payments.MandateCreditPending : '0' }} </h4>
       </mat-card>
      </div>
 
     </div>
 
-    <div class="table-container mt-3">
+    <div *ngIf="orderDataList.length > 0" class="table-container mt-3">
       <form class="example-form">
         <h2 style="float:left">Order Details</h2>
         <mat-form-field style="float: right;" class="example-full-width">
@@ -62,7 +66,21 @@
   
             <ng-container matColumnDef="DealershipName">
               <mat-header-cell *matHeaderCellDef > Buyer </mat-header-cell>
-              <mat-cell *matCellDef="let row" data-label="DealershipName"> {{row.DealershipName}}<br>({{row.DistrictName}}) </mat-cell>
+              <mat-cell *matCellDef="let row" data-label="DealershipName">
+                <div class="row">
+                  <div class="col-md-10">
+                    {{row.DealershipName}}<br>({{row.DistrictName}}) 
+                  </div>
+                  <div class="col-md-2">
+                    <i style="cursor: pointer;" (click)="callInitiate(row.PhoneNo)"  class="material-icons">phone</i>
+                  </div>
+                </div>                 
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="PhoneNo">
+              <mat-header-cell *matHeaderCellDef > Phone No </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="PhoneNo"> {{row.PhoneNo}} </mat-cell>
             </ng-container>
         
   
@@ -82,7 +100,7 @@
               <mat-cell *matCellDef="let row" data-label="OrderPaymentTypeName"> {{row.OrderPaymentTypeName}} </mat-cell>
             </ng-container>
   
-            <ng-container matColumnDef="PhoneNo">
+            <ng-container matColumnDef="Discounts">
               <mat-header-cell *matHeaderCellDef > Discounts </mat-header-cell>
               <mat-cell *matCellDef="let row" data-label="phone"> NA </mat-cell>
             </ng-container>
@@ -105,7 +123,88 @@
   
     </div>
       </div>
-      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+      <!-- <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator> -->
     </div>
 
+    <div *ngIf="onboardingDataList.length > 0" class="table-container mt-3">
+      <form class="example-form">
+        <h2 style="float:left">Onboarding Details</h2>
+        <mat-form-field style="float: right;" class="example-full-width">
+          <input type="text" autocomplete="false" (keyup)="applyOnboardingFilter($event.target.value)" matInput placeholder="Search">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>          
+      </form>
+      <div class="card card-bordered"  *ngIf= "!loader">      
+        <div class="card-body">
+        <div class="example-container mat-elevation-z8">
+  
+          <mat-table [dataSource]="dataSourceOnboarding" matSort>     
+
+            <ng-container matColumnDef="Sno">
+              <mat-header-cell *matHeaderCellDef > S.No </mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index" data-label="Sno"> {{i + 1}} </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="DealershipName">
+              <mat-header-cell *matHeaderCellDef > Dealership Name </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="DealershipName"> {{row.DealershipName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="DealerAddress">
+              <mat-header-cell *matHeaderCellDef > Dealer Address </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="DealerAddress"> {{row.AreaName + " " + row.DistrictName + " " + row.StateName}} </mat-cell>
+            </ng-container>
+        
+  
+            <ng-container matColumnDef="DateOfEnrolment">
+              <mat-header-cell *matHeaderCellDef > Registered On </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="DateOfEnrolment"> {{row.DateOfEnrolment}}</mat-cell>
+            </ng-container>
+        
+  
+            <ng-container matColumnDef="PhoneNo">
+              <mat-header-cell *matHeaderCellDef > Phone No </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="PhoneNo"> {{row.PhoneNo}} </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="DistributorName">
+              <mat-header-cell *matHeaderCellDef > Distributor Name </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="DistributorName"> {{row.DistributorName}} </mat-cell>
+            </ng-container>  
+
+            <mat-header-row *matHeaderRowDef="displayedOnboardingColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedOnboardingColumns;">
+            </mat-row>
+          </mat-table>
+        
+  
+        </div>        
+  
+    </div>
+      </div>
+      <!-- <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator> -->
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal in" id="exampleModalCenter" tabindex="-1" role="dialog" [style.display]="callInitiated ? 'block' : 'none'" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Call Initiated Successfully !!</h3>
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" (click)="closeModel()">Ok</button>
+      </div>
+    </div>
+  </div>
 </div>
